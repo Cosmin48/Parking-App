@@ -14,16 +14,16 @@
     <children>
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
             <children>
-                <Label layoutX="43.0" text="Hello!">
+                <Button layoutX="21.0" layoutY="123.0" mnemonicParsing="false" onAction="#switchtoScene1" text="Switch to hello">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Button>
+                <Label layoutX="53.0" text="Bye!">
                     <font>
                         <Font size="50.0" />
                     </font>
                 </Label>
-                <Button layoutX="10.0" layoutY="100.0" mnemonicParsing="false" onAction="#switchtoScene2" text="Switch to bye">
-                    <font>
-                        <Font size="30.0" />
-                    </font>
-                </Button>
             </children>
         </AnchorPane>
     </children>
