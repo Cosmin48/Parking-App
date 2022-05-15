@@ -25,7 +25,6 @@
    <center>
       <AnchorPane onDragDetected="#cancelButtonOnAction" prefHeight="400.0" prefWidth="332.0" style="-fx-background-color: #ECECE7;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="32.0" fitWidth="46.0" layoutX="119.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="25.0" layoutY="89.0" text="Username">
                <font>
                   <Font size="13.0" />
@@ -39,7 +38,7 @@
             </Label>
             <Button fx:id="loginButton" layoutX="22.0" layoutY="254.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: #22427C;" text="Login" textFill="#fefefe" />
             <Button fx:id="cancelButton" layoutX="22.0" layoutY="303.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: #22427C;" text="Cancel" textFill="#fefefe" />
-            <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="82.0" layoutY="221.0" textFill="#db1702">
+            <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="24.0" layoutY="222.0" prefHeight="19.0" prefWidth="244.0" textFill="#db1702">
                <font>
                   <Font size="13.0" />
                </font>
