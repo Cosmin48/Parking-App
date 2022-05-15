@@ -14,9 +14,9 @@
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="228.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="228.0" fitWidth="244.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="brandingImageView" fitHeight="228.0" fitWidth="244.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../../Desktop/images.png" />
+                  <Image url="@../../../images/images.png" />
                </image>
             </ImageView>
          </children>
@@ -37,9 +37,9 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <Button fx:id="loginButton" layoutX="22.0" layoutY="254.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: #22427C;" text="Login" textFill="#fefefe" />
+            <Button fx:id="loginButton" layoutX="22.0" layoutY="254.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: #22427C;" text="Login" textFill="#fefefe" />
             <Button fx:id="cancelButton" layoutX="22.0" layoutY="303.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: #22427C;" text="Cancel" textFill="#fefefe" />
-            <Label alignment="CENTER" layoutX="82.0" layoutY="221.0" text="Error. Please try again." textFill="#db1702">
+            <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="82.0" layoutY="221.0" textFill="#db1702">
                <font>
                   <Font size="13.0" />
                </font>
