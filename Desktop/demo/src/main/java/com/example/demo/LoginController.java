@@ -56,8 +56,7 @@ public class LoginController {
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while(queryResult.next()){
                 if (queryResult.getInt(1)==1) {
-                   //loginMessageLabel.setText("Welcome!");
-                    createAccountForm();
+                   loginMessageLabel.setText("Welcome!");
                 } else {
                     loginMessageLabel.setText("Invalid login. Please try again!");
                     usernameTextField.setText("");
