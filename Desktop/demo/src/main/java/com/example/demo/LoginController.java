@@ -2,7 +2,10 @@ package com.example.demo;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -11,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import javafx.scene.control.Button;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.sql.Connection;
@@ -52,7 +56,8 @@ public class LoginController {
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while(queryResult.next()){
                 if (queryResult.getInt(1)==1) {
-                   loginMessageLabel.setText("Welcome!");
+                   //loginMessageLabel.setText("Welcome!");
+                    createAccountForm();
                 } else {
                     loginMessageLabel.setText("Invalid login. Please try again!");
                     usernameTextField.setText("");
@@ -61,6 +66,19 @@ public class LoginController {
                 }
             }
         }catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public void createAccountForm(){
+        try{
+            Parent root= FXMLLoader.load(getClass().getResource("register.fxml"));
+            Stage registerStage=new Stage();
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            registerStage.setScene(new Scene(root, 520 ,550));
+            registerStage.show();
+
+        }catch(Exception e){
             e.printStackTrace();
             e.getCause();
         }
