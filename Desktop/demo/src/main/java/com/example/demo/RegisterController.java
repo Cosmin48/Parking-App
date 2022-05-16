@@ -1,4 +1,5 @@
 package com.example.demo;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 
+
 public class RegisterController {
     @FXML
     private Button closeButton;
@@ -30,29 +32,64 @@ public class RegisterController {
     private PasswordField confirmPasswordField;
     @FXML
     private Label confirmPasswordLabel;
+    @FXML
+    private TextField firstnameTextField;
+    @FXML
+    private TextField lastnameTextField;
+    @FXML
+    private TextField usernameTextField;
+    @FXML
+    private TextField cardnumberTextField;
+
+
+
     private Parent root;
     private Stage stage;
     private Scene scene;
 
     public void registerButtonOnAction(ActionEvent event){
-        registrationMessageLabel.setText("User has been registered succesfully!");
-        registerUser();
-    }
-
-    public void closeButtonOnAction(ActionEvent event){
-        Stage stage=(Stage)closeButton.getScene().getWindow();
-        stage.close();
-    }
-
-    public void registerUser(){
-
         if (setPasswordField.getText().equals(confirmPasswordField.getText())){
-            confirmPasswordLabel.setText("You are set");
+            registerUser();
+            confirmPasswordLabel.setText("");
 
         }else{
             confirmPasswordLabel.setText("Password does not match");
 
         }
+
+    }
+
+    public void closeButtonOnAction(ActionEvent event){
+        Stage stage=(Stage)closeButton.getScene().getWindow();
+        stage.close();
+        Platform.exit();
+    }
+
+    public void registerUser(){
+       DatabaseConnection connectNow=new DatabaseConnection();
+       Connection connectDB=connectNow.getConnection();
+
+       String firstname=firstnameTextField.getText();
+       String lastname=lastnameTextField.getText();
+       String username=usernameTextField.getText();
+       String password=setPasswordField.getText();
+       String card_number=cardnumberTextField.getText();
+
+
+       String insertFields= "INSERT INTO user_account (firstname, lastname, username, password, card_number) VALUES('";
+       String insertValues=firstname+ "','" +lastname+ "','"+username+ "','"+ password+"','" +card_number+ "')";
+       String insertToRegister=insertFields+ insertValues;
+
+       try{
+           Statement statement=connectDB.createStatement();
+           statement.executeUpdate(insertToRegister);
+           registrationMessageLabel.setText("User has been registered successfully!");
+       }catch(Exception e){
+           e.printStackTrace();
+           e.getCause();
+       }
+
+
     }
     public void switchToLogin(ActionEvent event) throws IOException {
          root = FXMLLoader.load(getClass().getResource("login.fxml"));
