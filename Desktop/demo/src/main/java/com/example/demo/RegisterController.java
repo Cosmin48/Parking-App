@@ -22,9 +22,15 @@ import java.sql.Statement;
 public class RegisterController {
     @FXML
     private Button closeButton;
+    @FXML
+    private Label registrationMessageLabel;
     private Parent root;
     private Stage stage;
     private Scene scene;
+
+    public void registerButtonOnAction(ActionEvent event){
+        registrationMessageLabel.setText("User has been registered succesfully!");
+    }
 
     public void closeButtonOnAction(ActionEvent event){
         Stage stage=(Stage)closeButton.getScene().getWindow();
