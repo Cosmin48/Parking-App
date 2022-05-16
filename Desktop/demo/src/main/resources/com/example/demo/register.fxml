@@ -71,12 +71,12 @@
       </Button>
       <PasswordField fx:id="setPasswordField" layoutX="89.0" layoutY="281.0" prefHeight="26.0" prefWidth="336.0" promptText="Password" />
       <PasswordField fx:id="confirmPasswordField" layoutX="86.0" layoutY="334.0" prefHeight="27.0" prefWidth="336.0" promptText="Password" />
-      <Label fx:id="registrationMessageLabel" alignment="CENTER" layoutX="14.0" layoutY="94.0" prefHeight="19.0" prefWidth="494.0" text="User registered successfully!" textFill="#2c2fd4">
+      <Label fx:id="registrationMessageLabel" alignment="CENTER" layoutX="14.0" layoutY="94.0" prefHeight="19.0" prefWidth="494.0" textFill="#2c2fd4">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="confirmPasswordLabel" alignment="CENTER" layoutX="87.0" layoutY="317.0" prefHeight="19.0" prefWidth="494.0" text="Password does not match!" textFill="#ef604a">
+      <Label fx:id="confirmPasswordLabel" alignment="CENTER" layoutX="87.0" layoutY="317.0" prefHeight="19.0" prefWidth="494.0" textFill="#ef604a">
          <font>
             <Font size="13.0" />
          </font>

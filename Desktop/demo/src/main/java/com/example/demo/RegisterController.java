@@ -47,12 +47,14 @@ public class RegisterController {
     private Stage stage;
     private Scene scene;
 
-    public void registerButtonOnAction(ActionEvent event){
+    public void registerButtonOnAction(ActionEvent event) throws IOException{
         if (setPasswordField.getText().equals(confirmPasswordField.getText())){
             registerUser();
             confirmPasswordLabel.setText("");
+            switchToSuccess(event);
 
         }else{
+            registrationMessageLabel.setText("");
             confirmPasswordLabel.setText("Password does not match");
 
         }
@@ -91,12 +93,19 @@ public class RegisterController {
 
 
     }
-    public void switchToLogin(ActionEvent event) throws IOException {
-         root = FXMLLoader.load(getClass().getResource("login.fxml"));
+    public void switchToSuccess(ActionEvent event) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("success.fxml"));
          stage=(Stage)((Node)event.getSource()).getScene().getWindow();
          scene=new Scene(root);
          stage.setScene(scene);
          stage.show();
+    }
+    public void switchToLogin(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }
