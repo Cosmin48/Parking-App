@@ -59,7 +59,7 @@
          </font>
       </Label>
       <TextField fx:id="cardnumberTextField" layoutX="86.0" layoutY="390.0" prefHeight="26.0" prefWidth="336.0" promptText="Card Number" />
-      <Button fx:id="registerButton" layoutX="86.0" layoutY="464.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="336.0" style="-fx-background-color: #0000FF;" text="Register" textFill="#f2ebeb">
+      <Button fx:id="registerButton" layoutX="86.0" layoutY="464.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="27.0" prefWidth="336.0" style="-fx-background-color: #0000FF;" text="Register" textFill="#f2ebeb">
          <font>
             <Font size="13.0" />
          </font>
