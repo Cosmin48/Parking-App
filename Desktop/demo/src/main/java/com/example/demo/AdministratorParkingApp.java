@@ -7,12 +7,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class RegisterApplication extends Application {
+public class AdministratorParkingApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root=FXMLLoader.load(getClass().getResource("register.fxml"));
+        Parent root=FXMLLoader.load(getClass().getResource("administrator.fxml"));
         primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setScene(new Scene(root, 520 ,550));
+        primaryStage.setScene(new Scene(root, 520 ,400));
         primaryStage.show();
     }
 

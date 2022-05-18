@@ -62,7 +62,7 @@ public class RegisterCityHallController {
         if (setPasswordField.getText().equals(confirmPasswordField.getText())){
             registerUser();
             confirmPasswordLabel.setText("");
-            switchToSuccess(event);
+            switchToCityHallStart(event);
 
         }else{
             registrationMessageLabel.setText("");
@@ -89,8 +89,8 @@ public class RegisterCityHallController {
         String iban=ibanTextField.getText();
 
 
-        String insertFields= "INSERT INTO cityhall_account (firstname, lastname, username, password, iban) VALUES('";
-        String insertValues=firstname+ "','" +lastname+ "','"+username+ "','"+ password+"','" +iban+ "')";
+        String insertFields= "INSERT INTO cityhall_account (firstname, lastname, username, password, iban, approve) VALUES('";
+        String insertValues=firstname+ "','" +lastname+ "','"+username+ "','"+ password+"','" +iban+ "', '0')";
         String insertToRegister=insertFields+ insertValues;
 
         try{
@@ -104,15 +104,8 @@ public class RegisterCityHallController {
 
 
     }
-    public void switchToSuccess(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("success.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-    public void switchToLogin(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("l.fxml"));
+    public void switchToCityHallStart(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("cityhallStart.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);
