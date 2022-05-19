@@ -19,10 +19,10 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 import javax.swing.*;
@@ -57,6 +57,8 @@ public class RegisterCityHallController {
     private Parent root;
     private Stage stage;
     private Scene scene;
+    private InputStream fis;
+    private File file;
 
     public void registerButtonOnAction(ActionEvent event) throws IOException{
         if (setPasswordField.getText().equals(confirmPasswordField.getText())){
@@ -79,24 +81,24 @@ public class RegisterCityHallController {
     }
 
     public void registerUser(){
-        DatabaseConnection connectNow=new DatabaseConnection();
-        Connection connectDB=connectNow.getConnection();
-
-        String firstname=firstnameTextField.getText();
-        String lastname=lastnameTextField.getText();
-        String username=usernameTextField.getText();
-        String password=setPasswordField.getText();
-        String iban=ibanTextField.getText();
-
-
-        String insertFields= "INSERT INTO cityhall_account (firstname, lastname, username, password, iban, approve) VALUES('";
-        String insertValues=firstname+ "','" +lastname+ "','"+username+ "','"+ password+"','" +iban+ "', '0')";
-        String insertToRegister=insertFields+ insertValues;
-
         try{
-            Statement statement=connectDB.createStatement();
-            statement.executeUpdate(insertToRegister);
-            registrationMessageLabel.setText("User has been registered successfully!");
+            DatabaseConnection connectNow=new DatabaseConnection();
+            Connection connectDB=connectNow.getConnection();
+            String firstname=firstnameTextField.getText();
+            String lastname=lastnameTextField.getText();
+            String username=usernameTextField.getText();
+            String password=setPasswordField.getText();
+            String iban=ibanTextField.getText();
+            PreparedStatement ps=connectDB.prepareStatement("INSERT INTO cityhall_account (firstname, lastname, username, password, iban, approve, image) VALUES (?,?,?,?,?,?,?)");
+            ps.setString(1,firstname);
+            ps.setString(2,lastname);
+            ps.setString(3,username);
+            ps.setString(4,password);
+            ps.setString(5,iban);
+            ps.setInt(6,0);
+            fis=new FileInputStream(file);
+            ps.setBinaryStream(7, fis, (int)file.length());
+            ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
             e.getCause();
@@ -116,7 +118,7 @@ public class RegisterCityHallController {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().clear();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files","*.png","*.jpg","*.gif"));
-        File file=fileChooser.showOpenDialog(null);
+        file=fileChooser.showOpenDialog(null);
         if(file!=null) {
             imageView.setImage(new Image(file.toURI().toString()));
         } else imageLabelError.setText("Invalid image");
