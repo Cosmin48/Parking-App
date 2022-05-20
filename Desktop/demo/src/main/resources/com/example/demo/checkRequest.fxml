@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="520.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AdministratorController">
+<AnchorPane fx:id="anchorPane" prefHeight="520.0" prefWidth="661.0" style="-fx-background-color: #B0E0E6;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AdministratorController">
    <children>
-      <TableView fx:id="table_users" onMouseClicked="#retrieveImage" prefHeight="285.0" prefWidth="381.0">
+      <TableView fx:id="table_users" onMouseClicked="#setImage" prefHeight="285.0" prefWidth="383.0">
         <columns>
-          <TableColumn fx:id="firstname" prefWidth="95.99999749660492" text="Firstname" />
-          <TableColumn fx:id="lastname" prefWidth="127.33341217041016" text="Lastname" />
-            <TableColumn fx:id="username" prefWidth="155.99997456868488" text="Username" />
+          <TableColumn fx:id="firstname" prefWidth="122.00002801418304" text="Firstname" />
+          <TableColumn fx:id="lastname" prefWidth="115.33332061767578" text="Lastname" />
+            <TableColumn fx:id="username" prefWidth="144.6666717529297" text="Username" />
         </columns>
       </TableView>
-      <ImageView fitHeight="159.0" fitWidth="205.0" layoutX="420.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView" fitHeight="159.0" fitWidth="205.0" layoutX="420.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="cancelButton" layoutX="182.0" layoutY="446.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" style="-fx-background-color: #0000ff;" text="Cancel" textFill="WHITE" />
+      <Button fx:id="acceptButton" layoutX="71.0" layoutY="346.0" mnemonicParsing="false" onAction="#acceptButtonOnAction" style="-fx-background-color: #B0E0E6;" textFill="WHITE" />
+      <Button fx:id="denyButton" layoutX="182.0" layoutY="346.0" mnemonicParsing="false" onAction="#denyButtonOnAction" style="-fx-background-color: #B0E0E6;" textFill="WHITE" />
    </children>
 </AnchorPane>

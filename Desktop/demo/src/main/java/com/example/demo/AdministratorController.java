@@ -4,6 +4,7 @@ package com.example.demo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,19 +17,27 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
 import java.io.*;
+import java.math.BigDecimal;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class AdministratorController implements Initializable{
     private Parent root;
     private Stage stage;
     private Scene scene;
+    @FXML
+    private ImageView imageView;
+    @FXML
+    private Button acceptButton;
+    @FXML
+    private Button denyButton;
     @FXML
     private TableView<AdminControllerTableView> table_users;
     @FXML
@@ -37,6 +46,10 @@ public class AdministratorController implements Initializable{
     private TableColumn<AdminControllerTableView,String> lastname;
     @FXML
     private TableColumn<AdminControllerTableView,String> username;
+    @FXML
+    private Button cancelButton;
+    @FXML
+    private AnchorPane anchorPane;
 
     public void switchTocheckRequest(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("checkRequest.fxml"));
@@ -45,14 +58,15 @@ public class AdministratorController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
+    ResultSet rs;
+    ObservableList<AdminControllerTableView> list= FXCollections.observableArrayList();
     @Override
     public void initialize(URL url,ResourceBundle resourceBundle){
         try{
             DatabaseConnection connectNow=new DatabaseConnection();
             Connection connectDB=connectNow.getConnection();
-            ObservableList<AdminControllerTableView> list= FXCollections.observableArrayList();
-            PreparedStatement ps=connectDB.prepareStatement("SELECT firstname,lastname,username FROM cityhall_account WHERE approve=0");
-            ResultSet rs=ps.executeQuery();
+            PreparedStatement ps=connectDB.prepareStatement("SELECT firstname,lastname,username,image FROM cityhall_account WHERE approve=0");
+            rs=ps.executeQuery();
             while(rs.next()){
                 list.add(new AdminControllerTableView(rs.getString("firstname"),rs.getString("lastname"),rs.getString("username")));
             }
@@ -60,10 +74,39 @@ public class AdministratorController implements Initializable{
             lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
             username.setCellValueFactory(new PropertyValueFactory<>("username"));
             table_users.setItems(list);
-
         }catch(Exception e){
             e.printStackTrace();
             e.getCause();
         }
+    }
+
+    public void cancelButtonOnAction(ActionEvent event){
+        Stage stage = (Stage)cancelButton.getScene().getWindow();
+        stage.close();
+    }
+    public void setImage(Event event){
+        acceptButton.setText("Accept");
+        acceptButton.setStyle("-fx-background-color: #0000ff; ");
+        denyButton.setText("Deny");
+        denyButton.setStyle("-fx-background-color: #0000ff; ");
+    }
+    private int index=0;
+    public void acceptButtonOnAction(ActionEvent event) throws SQLException {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+        PreparedStatement ps = connectDB.prepareStatement("UPDATE cityhall_account SET approve=1 WHERE username= ? ");
+        ps.setString(1,list.get(index).getUsername());
+        ps.executeUpdate();
+        System.out.println(list.get(index).getUsername());
+        index++;
+    }
+    public void denyButtonOnAction(ActionEvent event) throws SQLException {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+        PreparedStatement ps = connectDB.prepareStatement("UPDATE cityhall_account SET approve=-1 WHERE username= ? ");
+        ps.setString(1,list.get(index).getUsername());
+        ps.executeUpdate();
+        System.out.println(list.get(index).getUsername());
+        index++;
     }
 }

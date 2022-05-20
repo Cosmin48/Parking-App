@@ -3,6 +3,8 @@ package com.example.demo;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
+import java.sql.Blob;
+
 public class AdminControllerTableView {
     String firstname,lastname,username;
 
@@ -35,5 +37,4 @@ public class AdminControllerTableView {
     public void setUsername(String username) {
         this.username = username;
     }
-
 }
