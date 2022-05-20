@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="520.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AdministratorController">
    <children>
-      <TableView fx:id="table_users" prefHeight="285.0" prefWidth="381.0">
+      <TableView fx:id="table_users" onMouseClicked="#retrieveImage" prefHeight="285.0" prefWidth="381.0">
         <columns>
           <TableColumn fx:id="firstname" prefWidth="95.99999749660492" text="Firstname" />
           <TableColumn fx:id="lastname" prefWidth="127.33341217041016" text="Lastname" />
