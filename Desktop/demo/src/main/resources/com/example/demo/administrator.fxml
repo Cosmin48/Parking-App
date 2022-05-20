@@ -5,7 +5,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #B0E0E6;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AdministratorController">
    <children>
       <ImageView fitHeight="207.0" fitWidth="323.0" layoutX="133.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -13,7 +12,7 @@
             <Image url="@../../../images/parking.gif" />
          </image>
       </ImageView>
-      <Button layoutX="245.0" layoutY="234.0" mnemonicParsing="false" style="-fx-background-color: #0000FF;" text="Check requests" textFill="WHITE" />
+      <Button layoutX="245.0" layoutY="234.0" mnemonicParsing="false" onAction="#switchTocheckRequest" style="-fx-background-color: #0000FF;" text="Check requests" textFill="WHITE" />
       <Button layoutX="255.0" layoutY="282.0" mnemonicParsing="false" style="-fx-background-color: #0000FF;" text="See ratings" textFill="WHITE" />
       <Button layoutX="258.0" layoutY="332.0" mnemonicParsing="false" style="-fx-background-color: #0000FF;" text="Rate a city" textFill="WHITE" />
    </children>

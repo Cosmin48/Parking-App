@@ -4,45 +4,36 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 public class AdminControllerTableView {
-    String username;
-    ImageView request;
-    Button accept,deny;
-    public AdminControllerTableView(String username,ImageView request,Button accept, Button deny){
+    String firstname,lastname,username;
+
+    public AdminControllerTableView(String firstname,String lastname,String username){
+        this.firstname=firstname;
+        this.lastname=lastname;
         this.username=username;
-        this.request=request;
-        this.accept=accept;
-        this.deny=deny;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public ImageView getRequest() {
-        return request;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public Button getAccept() {
-        return accept;
-    }
-
-    public Button getDeny() {
-        return deny;
-    }
-
-    public void setRequest(ImageView request) {
-        this.request = request;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public void setAccept(Button accept) {
-        this.accept = accept;
-    }
-
-    public void setDeny(Button deny) {
-        this.deny = deny;
-    }
 }

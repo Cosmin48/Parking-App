@@ -1,4 +1,6 @@
 package com.example.demo;
+import javafx.collections.ObservableList;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -19,4 +21,5 @@ public class DatabaseConnection {
         }
         return databaseLink;
     }
+
 }

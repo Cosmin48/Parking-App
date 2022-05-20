@@ -2,18 +2,19 @@
 
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.CheckRequest">
+<AnchorPane prefHeight="520.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AdministratorController">
    <children>
-      <TableView prefHeight="401.0" prefWidth="600.0">
+      <TableView fx:id="table_users" prefHeight="285.0" prefWidth="381.0">
         <columns>
-          <TableColumn prefWidth="177.33334350585938" text="Username" />
-          <TableColumn prefWidth="229.33331298828125" text="Request" />
-            <TableColumn prefWidth="95.99993896484375" text="Accept" />
-            <TableColumn prefWidth="97.3333740234375" text="Deny" />
+          <TableColumn fx:id="firstname" prefWidth="95.99999749660492" text="Firstname" />
+          <TableColumn fx:id="lastname" prefWidth="127.33341217041016" text="Lastname" />
+            <TableColumn fx:id="username" prefWidth="155.99997456868488" text="Username" />
         </columns>
       </TableView>
+      <ImageView fitHeight="159.0" fitWidth="205.0" layoutX="420.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
