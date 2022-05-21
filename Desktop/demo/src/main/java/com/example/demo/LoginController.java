@@ -101,13 +101,13 @@ public class LoginController {
     private TextField timeTextField;
     private ResultSet rs;
     private ObservableList<Integer> list;
-    public void closeButtonOnAction(ActionEvent event){
-        Stage stage=(Stage)closeButton.getScene().getWindow();
+    public void closeButtonOnAction(ActionEvent event) {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
         Platform.exit();
     }
     private int price,approve;
-    public void okButtonOnAction(ActionEvent event) throws SQLException {
+    public void okButtonOnAction(ActionEvent event) throws SQLException, IOException {
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
         String querry="SELECT price FROM "+cityTextField.getText()+" WHERE area='"+areaTextField.getText()+"'";
@@ -134,5 +134,13 @@ public class LoginController {
                          PreparedStatement ps3=connectDB.prepareStatement(querry3);
                          ps3.executeUpdate();
         }
+       switchToOkPayment(event);
+    }
+    public void switchToOkPayment(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("okPaymentWindow.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

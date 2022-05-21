@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="154.0" prefWidth="303.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.LoginController">
+   <children>
+      <Button fx:id="successButton" layoutX="135.0" layoutY="92.0" mnemonicParsing="false" onAction="#switchToMain" style="-fx-background-color: #00FF;" text="Ok" textFill="WHITE" />
+      <TextField layoutX="85.0" layoutY="50.0" style="-fx-background-color: #0000;" text="Transaction complete!" />
+   </children>
+</AnchorPane>
