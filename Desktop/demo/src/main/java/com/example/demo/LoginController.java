@@ -41,6 +41,7 @@ public class LoginController {
     private Parent root;
     private Scene scene;
     private static int budget=0;
+    private static String username;
 
     public void loginButtonOnAction(ActionEvent event){
         if (!usernameTextField.getText().isBlank() && !enterPasswordField.getText().isBlank()){
@@ -62,6 +63,13 @@ public class LoginController {
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while(queryResult.next()){
                 if (queryResult.getInt(1)==1) {
+                    username=usernameTextField.getText();
+                    String text="SELECT budget FROM user_account WHERE username='"+username+"'";
+                    PreparedStatement preparedStatement=connectDB.prepareStatement(text);
+                    ResultSet rs=preparedStatement.executeQuery();
+                    while(rs.next()){
+                    budget=rs.getInt("budget");
+                    }
                    switchToMain(event);
                 } else {
                     loginMessageLabel.setText("Invalid login. Please try again!");
@@ -98,18 +106,23 @@ public class LoginController {
         stage.close();
         Platform.exit();
     }
-    private int price,new_budget;
+    private int price;
     public void okButtonOnAction(ActionEvent event) throws SQLException {
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
-        String querry="SELECT price FROM "+cityTextField.getText()+"( WHERE area="+areaTextField.getText();
+        String querry="SELECT price FROM "+cityTextField.getText()+" WHERE area='"+areaTextField.getText()+"'";
         PreparedStatement ps1=connectDB.prepareStatement(querry);
         rs= ps1.executeQuery();
-        if(rs.next()) {
+        while(rs.next()) {
             price= rs.getInt("price");
         }
-        else errorLabel.setText("Error");
-        ps1.executeUpdate();
+        int new_budget=budget-price*Integer.parseInt(timeTextField.getText());
+        if(new_budget<=0) errorLabel.setText("Error. Not enough founds");
+                     else {
+                         budget=new_budget;
+                         String querry1="UPDATE user_account SET budget= "+budget+" WHERE username='"+username+"'";
+                         PreparedStatement ps=connectDB.prepareStatement(querry1);
+                         ps.executeUpdate();
+        }
     }
-
 }

@@ -61,7 +61,7 @@ public class LoginCityHallController {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while(queryResult.next()){
-                if (queryResult.getInt(1)==0) {
+                if (queryResult.getInt(1)==1) {
                     username=usernameTextField.getText();
                     switchToMain(event);
                 } else {
