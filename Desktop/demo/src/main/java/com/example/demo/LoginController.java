@@ -106,7 +106,7 @@ public class LoginController {
         stage.close();
         Platform.exit();
     }
-    private int price,budgetBankc;
+    private int price,budgetBank;
     private String iban;
     public void okButtonOnAction(ActionEvent event) throws SQLException, IOException {
         DatabaseConnection connectNow=new DatabaseConnection();
@@ -134,10 +134,10 @@ public class LoginController {
                          PreparedStatement ps4=connectDB.prepareStatement(querry4);
                          ResultSet resultSet1=ps4.executeQuery();
                          while(resultSet1.next()){
-                         iban=resultSet1.getInt("iban");
+                         budgetBank=resultSet1.getInt("budget");
                          }
-                         approve=approve+price*Integer.parseInt(timeTextField.getText());
-                         String querry3="UPDATE cityhall_account SET approve= "+approve+" WHERE username='"+cityTextField.getText()+"'";
+                         budgetBank=budgetBank+price*Integer.parseInt(timeTextField.getText());
+                         String querry3="UPDATE cityhall_account SET approve= "+budgetBank+" WHERE username='"+cityTextField.getText()+"'";
                          PreparedStatement ps3=connectDB.prepareStatement(querry3);
                          ps3.executeUpdate();
         }
