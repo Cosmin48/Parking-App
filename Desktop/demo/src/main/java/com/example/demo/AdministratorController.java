@@ -101,7 +101,7 @@ public class AdministratorController implements Initializable{
         ps.setInt(1,buget);
         ps.setString(2,list.get(index).getUsername());
         ps.executeUpdate();
-        String querry="CREATE TABLE IF NOT EXISTS "+list.get(index).getUsername()+"(id int NOT NULL UNIQUE AUTO_INCREMENT, PRIMARY KEY(id))";
+        String querry="CREATE TABLE IF NOT EXISTS "+list.get(index).getUsername()+"(id int NOT NULL UNIQUE AUTO_INCREMENT, area VARCHAR(45) NOT NULL, price int NOT NULL, PRIMARY KEY(id))";
         PreparedStatement ps1=connectDB.prepareStatement(querry);
         ps1.executeUpdate();
         index++;

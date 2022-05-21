@@ -5,7 +5,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #B0E0E6;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.MainCityHallController">
    <children>
       <ImageView fitHeight="207.0" fitWidth="323.0" layoutX="133.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -16,6 +15,7 @@
       <Button layoutX="133.0" layoutY="297.0" mnemonicParsing="false" style="-fx-background-color: #0000FF;" text="Find unpayed" textFill="WHITE" />
       <Button layoutX="137.0" layoutY="240.0" mnemonicParsing="false" style="-fx-background-color: #0000FF;" text="View history" textFill="WHITE" />
       <Button layoutX="378.0" layoutY="240.0" mnemonicParsing="false" style="-fx-background-color: #0000FF;" text="See rating" textFill="WHITE" />
-      <Button layoutX="358.0" layoutY="297.0" mnemonicParsing="false" style="-fx-background-color: #0000FF;" text="New parking area" textFill="WHITE" />
+      <Button layoutX="358.0" layoutY="297.0" mnemonicParsing="false" onAction="#switchToAddParkingArea" style="-fx-background-color: #0000FF;" text="New parking area" textFill="WHITE" />
+      <Button fx:id="closeButton" layoutX="274.0" layoutY="344.0" mnemonicParsing="false" onAction="#closeButtonOnAction" style="-fx-background-color: #0000FF;" text="Cancel" textFill="WHITE" />
    </children>
 </AnchorPane>

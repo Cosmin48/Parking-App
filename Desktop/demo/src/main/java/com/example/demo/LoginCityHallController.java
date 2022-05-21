@@ -20,9 +20,7 @@ import javafx.stage.StageStyle;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 import java.net.URL;
 
@@ -39,7 +37,11 @@ public class LoginCityHallController {
     private Parent root;
     private Scene scene;
     private Stage stage;
-
+    private static String username;
+    @FXML
+    private TextField nameField;
+    @FXML
+    private TextField priceField;
     public void loginButtonOnAction(ActionEvent event){
         if (!usernameTextField.getText().isBlank() && !enterPasswordField.getText().isBlank()){
             validateLogin(event);
@@ -59,7 +61,8 @@ public class LoginCityHallController {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while(queryResult.next()){
-                if (queryResult.getInt(1)==1) {
+                if (queryResult.getInt(1)>0) {
+                    username=usernameTextField.getText();
                     switchToMain(event);
                 } else {
                     loginMessageLabel.setText("Invalid login. Please try again!");
@@ -78,5 +81,14 @@ public class LoginCityHallController {
         scene=new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    public void addButton(ActionEvent event) throws SQLException {
+        DatabaseConnection connectNow=new DatabaseConnection();
+        Connection connectDB=connectNow.getConnection();
+        String querry="INSERT INTO "+username+ " (area,price) VALUES (?,?)";
+        PreparedStatement ps=connectDB.prepareStatement(querry);
+        ps.setString(1,nameField.getText());
+        ps.setInt(2,Integer.parseInt(priceField.getText()));
+        ps.executeUpdate();
     }
 }
