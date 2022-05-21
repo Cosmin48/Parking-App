@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,9 +21,7 @@ import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 import java.net.URL;
 
@@ -40,6 +40,7 @@ public class LoginController {
     private Stage stage;
     private Parent root;
     private Scene scene;
+    private static int budget=0;
 
     public void loginButtonOnAction(ActionEvent event){
         if (!usernameTextField.getText().isBlank() && !enterPasswordField.getText().isBlank()){
@@ -78,4 +79,37 @@ public class LoginController {
         stage.setScene(scene);
         stage.show();
     }
+    @FXML
+    private Button okButton;
+    @FXML
+    private Button closeButton;
+    @FXML
+    private Label errorLabel;
+    @FXML
+    private TextField cityTextField;
+    @FXML
+    private TextField areaTextField;
+    @FXML
+    private TextField timeTextField;
+    private ResultSet rs;
+    private ObservableList<Integer> list;
+    public void closeButtonOnAction(ActionEvent event){
+        Stage stage=(Stage)closeButton.getScene().getWindow();
+        stage.close();
+        Platform.exit();
+    }
+    private int price,new_budget;
+    public void okButtonOnAction(ActionEvent event) throws SQLException {
+        DatabaseConnection connectNow=new DatabaseConnection();
+        Connection connectDB=connectNow.getConnection();
+        String querry="SELECT price FROM "+cityTextField.getText()+"( WHERE area="+areaTextField.getText();
+        PreparedStatement ps1=connectDB.prepareStatement(querry);
+        rs= ps1.executeQuery();
+        if(rs.next()) {
+            price= rs.getInt("price");
+        }
+        else errorLabel.setText("Error");
+        ps1.executeUpdate();
+    }
+
 }

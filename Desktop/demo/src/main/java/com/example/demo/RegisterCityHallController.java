@@ -58,7 +58,7 @@ public class RegisterCityHallController {
     private Stage stage;
     private Scene scene;
     private InputStream fis;
-    private File file;
+    private static File file;
 
     public void registerButtonOnAction(ActionEvent event) throws IOException{
         if (setPasswordField.getText().equals(confirmPasswordField.getText())){
@@ -96,8 +96,7 @@ public class RegisterCityHallController {
             ps.setString(4,password);
             ps.setString(5,iban);
             ps.setInt(6,0);
-            fis=new FileInputStream(file);
-            ps.setBinaryStream(7, fis, (int)file.length());
+            ps.setString(7,file.toURI().toString());
             ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();

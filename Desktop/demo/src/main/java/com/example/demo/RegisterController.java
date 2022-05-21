@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Statement;
-
+import java.util.Random;
 
 
 public class RegisterController {
@@ -78,8 +78,8 @@ public class RegisterController {
        String card_number=cardnumberTextField.getText();
 
 
-       String insertFields= "INSERT INTO user_account (firstname, lastname, username, password, card_number) VALUES('";
-       String insertValues=firstname+ "','" +lastname+ "','"+username+ "','"+ password+"','" +card_number+ "')";
+       String insertFields= "INSERT INTO user_account (firstname, lastname, username, password, card_number, budget) VALUES('";
+       String insertValues=firstname+ "','" +lastname+ "','"+username+ "','"+ password+"','" +card_number+ "',"+(10+(new Random().nextInt(5)))+")";
        String insertToRegister=insertFields+ insertValues;
 
        try{

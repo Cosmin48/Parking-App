@@ -20,7 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.awt.event.MouseEvent;
 import java.io.*;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -59,8 +58,8 @@ public class AdministratorController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
-    ResultSet rs;
-    ObservableList<AdminControllerTableView> list= FXCollections.observableArrayList();
+    private ResultSet rs;
+    private ObservableList<AdminControllerTableView> list= FXCollections.observableArrayList();
     @Override
     public void initialize(URL url,ResourceBundle resourceBundle){
         try{
@@ -69,12 +68,22 @@ public class AdministratorController implements Initializable{
             PreparedStatement ps=connectDB.prepareStatement("SELECT firstname,lastname,username,image FROM cityhall_account WHERE approve=0");
             rs=ps.executeQuery();
             while(rs.next()){
-                list.add(new AdminControllerTableView(rs.getString("firstname"),rs.getString("lastname"),rs.getString("username")));
+                list.add(new AdminControllerTableView(rs.getString("firstname"),rs.getString("lastname"),rs.getString("username"),rs.getString("image")));
             }
             firstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
             lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
             username.setCellValueFactory(new PropertyValueFactory<>("username"));
             table_users.setItems(list);
+            table_users.setOnMouseClicked(e->{
+                     AdminControllerTableView user= table_users.getSelectionModel().getSelectedItem();
+                     Image image=new Image(user.getImage());
+                     imageView.setImage(image);
+                     acceptButton.setText("Accept");
+                     acceptButton.setStyle("-fx-background-color: #0000ff; ");
+                     denyButton.setText("Deny");
+                     denyButton.setStyle("-fx-background-color: #0000ff; ");
+                    }
+                    );
         }catch(Exception e){
             e.printStackTrace();
             e.getCause();
@@ -84,12 +93,6 @@ public class AdministratorController implements Initializable{
     public void cancelButtonOnAction(ActionEvent event){
         Stage stage = (Stage)cancelButton.getScene().getWindow();
         stage.close();
-    }
-    public void setImage(Event event){
-        acceptButton.setText("Accept");
-        acceptButton.setStyle("-fx-background-color: #0000ff; ");
-        denyButton.setText("Deny");
-        denyButton.setStyle("-fx-background-color: #0000ff; ");
     }
     private int index=0;
     public void acceptButtonOnAction(ActionEvent event) throws SQLException {
