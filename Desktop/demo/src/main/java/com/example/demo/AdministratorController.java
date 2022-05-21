@@ -26,6 +26,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
 import java.util.Calendar;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class AdministratorController implements Initializable{
@@ -94,10 +95,12 @@ public class AdministratorController implements Initializable{
     public void acceptButtonOnAction(ActionEvent event) throws SQLException {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
-        PreparedStatement ps = connectDB.prepareStatement("UPDATE cityhall_account SET approve=1 WHERE username= ? ");
-        ps.setString(1,list.get(index).getUsername());
+        Random random=new Random();
+        int buget=1000+random.nextInt(500);
+        PreparedStatement ps = connectDB.prepareStatement("UPDATE cityhall_account SET approve=? WHERE username= ? ");
+        ps.setInt(1,buget);
+        ps.setString(2,list.get(index).getUsername());
         ps.executeUpdate();
-        System.out.println(list.get(index).getUsername());
         index++;
     }
     public void denyButtonOnAction(ActionEvent event) throws SQLException {
@@ -106,7 +109,6 @@ public class AdministratorController implements Initializable{
         PreparedStatement ps = connectDB.prepareStatement("UPDATE cityhall_account SET approve=-1 WHERE username= ? ");
         ps.setString(1,list.get(index).getUsername());
         ps.executeUpdate();
-        System.out.println(list.get(index).getUsername());
         index++;
     }
 }
