@@ -98,10 +98,8 @@ public class AdministratorController implements Initializable{
     public void acceptButtonOnAction(ActionEvent event) throws SQLException {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
-        Random random=new Random();
-        int buget=1000+random.nextInt(500);
         PreparedStatement ps = connectDB.prepareStatement("UPDATE cityhall_account SET approve=? WHERE username= ? ");
-        ps.setInt(1,buget);
+        ps.setInt(1,1);
         ps.setString(2,list.get(index).getUsername());
         ps.executeUpdate();
         String querry="CREATE TABLE IF NOT EXISTS "+list.get(index).getUsername()+"(id int NOT NULL UNIQUE AUTO_INCREMENT, area VARCHAR(45) NOT NULL, price int NOT NULL, PRIMARY KEY(id))";
