@@ -106,7 +106,7 @@ public class LoginController {
         stage.close();
         Platform.exit();
     }
-    private int price;
+    private int price,approve;
     public void okButtonOnAction(ActionEvent event) throws SQLException {
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
@@ -123,6 +123,16 @@ public class LoginController {
                          String querry1="UPDATE user_account SET budget= "+budget+" WHERE username='"+username+"'";
                          PreparedStatement ps=connectDB.prepareStatement(querry1);
                          ps.executeUpdate();
+                         String querry2="SELECT * FROM cityhall_account WHERE username='"+cityTextField.getText()+"'";
+                         PreparedStatement ps2=connectDB.prepareStatement(querry2);
+                         ResultSet resultSet=ps2.executeQuery();
+                         while(resultSet.next()){
+                             approve=resultSet.getInt("approve");
+                         }
+                         approve=approve+price*Integer.parseInt(timeTextField.getText());
+                         String querry3="UPDATE cityhall_account SET approve= "+approve+" WHERE username='"+cityTextField.getText()+"'";
+                         PreparedStatement ps3=connectDB.prepareStatement(querry3);
+                         ps3.executeUpdate();
         }
     }
 }
