@@ -63,7 +63,7 @@ public class LoginController {
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while(queryResult.next()){
                 if (queryResult.getInt(1)==1) {
-                    cardNumber=usernameTextField.getText();
+                    cardNumber=enterCardNumberField.getText();
                     String text="SELECT budget FROM card_numbers WHERE card_numbers='"+cardNumber+"'";
                     PreparedStatement preparedStatement=connectDB.prepareStatement(text);
                     ResultSet rs=preparedStatement.executeQuery();
@@ -137,11 +137,11 @@ public class LoginController {
                          budgetBank=resultSet1.getInt("budget");
                          }
                          budgetBank=budgetBank+price*Integer.parseInt(timeTextField.getText());
-                         String querry3="UPDATE cityhall_account SET approve= "+budgetBank+" WHERE username='"+cityTextField.getText()+"'";
+                         String querry3="UPDATE bank_account SET budget= "+budgetBank+" WHERE bank_account='"+iban+"'";
                          PreparedStatement ps3=connectDB.prepareStatement(querry3);
                          ps3.executeUpdate();
+                         switchToOkPayment(event);
         }
-       switchToOkPayment(event);
     }
     public void switchToOkPayment(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("okPaymentWindow.fxml"));
