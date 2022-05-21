@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Random;
 
@@ -46,12 +48,30 @@ public class RegisterController {
     private Parent root;
     private Stage stage;
     private Scene scene;
-
+    public void findInCard_database(String card_number,ActionEvent event){
+        String querry="SELECT count(1) from card_numbers WHERE card_numbers='"+card_number+"'";
+        DatabaseConnection connectNow=new DatabaseConnection();
+        Connection connectDB=connectNow.getConnection();
+        try{
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(querry);
+            while(queryResult.next()){
+                if (queryResult.getInt(1)==1) {
+                    registerUser();
+                    confirmPasswordLabel.setText("");
+                    switchToSuccess(event);
+                } else {
+                    registrationMessageLabel.setText("Card number not found");
+                }
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
     public void registerButtonOnAction(ActionEvent event) throws IOException{
         if (setPasswordField.getText().equals(confirmPasswordField.getText())){
-            registerUser();
-            confirmPasswordLabel.setText("");
-            switchToSuccess(event);
+                findInCard_database(cardnumberTextField.getText(),event);
 
         }else{
             registrationMessageLabel.setText("");
@@ -78,8 +98,8 @@ public class RegisterController {
        String card_number=cardnumberTextField.getText();
 
 
-       String insertFields= "INSERT INTO user_account (firstname, lastname, username, password, card_number, budget) VALUES('";
-       String insertValues=firstname+ "','" +lastname+ "','"+username+ "','"+ password+"','" +card_number+ "',"+(10+(new Random().nextInt(5)))+")";
+       String insertFields= "INSERT INTO user_account (firstname, lastname, username, password, card_number) VALUES('";
+       String insertValues=firstname+ "','" +lastname+ "','"+username+ "','"+ password+"','" +card_number+ "')";
        String insertToRegister=insertFields+ insertValues;
 
        try{

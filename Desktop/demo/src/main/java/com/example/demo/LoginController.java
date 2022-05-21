@@ -41,7 +41,7 @@ public class LoginController {
     private Parent root;
     private Scene scene;
     private static int budget=0;
-    private static String username;
+    private static String cardNumber;
 
     public void loginButtonOnAction(ActionEvent event){
         if (!usernameTextField.getText().isBlank() && !enterPasswordField.getText().isBlank()){
@@ -63,8 +63,8 @@ public class LoginController {
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while(queryResult.next()){
                 if (queryResult.getInt(1)==1) {
-                    username=usernameTextField.getText();
-                    String text="SELECT budget FROM user_account WHERE username='"+username+"'";
+                    cardNumber=usernameTextField.getText();
+                    String text="SELECT budget FROM card_numbers WHERE card_numbers='"+cardNumber+"'";
                     PreparedStatement preparedStatement=connectDB.prepareStatement(text);
                     ResultSet rs=preparedStatement.executeQuery();
                     while(rs.next()){
@@ -106,7 +106,8 @@ public class LoginController {
         stage.close();
         Platform.exit();
     }
-    private int price,approve;
+    private int price,budgetBankc;
+    private String iban;
     public void okButtonOnAction(ActionEvent event) throws SQLException, IOException {
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
@@ -120,14 +121,20 @@ public class LoginController {
         if(new_budget<=0) errorLabel.setText("Error. Not enough founds");
                      else {
                          budget=new_budget;
-                         String querry1="UPDATE user_account SET budget= "+budget+" WHERE username='"+username+"'";
+                         String querry1="UPDATE card_numbers SET budget= "+budget+" WHERE card_numbers='"+cardNumber+"'";
                          PreparedStatement ps=connectDB.prepareStatement(querry1);
                          ps.executeUpdate();
                          String querry2="SELECT * FROM cityhall_account WHERE username='"+cityTextField.getText()+"'";
                          PreparedStatement ps2=connectDB.prepareStatement(querry2);
                          ResultSet resultSet=ps2.executeQuery();
                          while(resultSet.next()){
-                             approve=resultSet.getInt("approve");
+                             iban=resultSet.getString("iban");
+                         }
+                         String querry4="SELECT * FROM bank_account WHERE bank_account='"+iban+"'";
+                         PreparedStatement ps4=connectDB.prepareStatement(querry4);
+                         ResultSet resultSet1=ps4.executeQuery();
+                         while(resultSet1.next()){
+                         iban=resultSet1.getInt("iban");
                          }
                          approve=approve+price*Integer.parseInt(timeTextField.getText());
                          String querry3="UPDATE cityhall_account SET approve= "+approve+" WHERE username='"+cityTextField.getText()+"'";
