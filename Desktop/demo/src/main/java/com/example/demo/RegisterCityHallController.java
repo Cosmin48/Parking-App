@@ -20,10 +20,7 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 import javax.swing.*;
 
@@ -59,13 +56,30 @@ public class RegisterCityHallController {
     private Scene scene;
     private InputStream fis;
     private static File file;
-
+    public void findInCard_database(String card_number,ActionEvent event){
+        String querry="SELECT count(1) from bank_account WHERE bank_account='"+card_number+"'";
+        DatabaseConnection connectNow=new DatabaseConnection();
+        Connection connectDB=connectNow.getConnection();
+        try{
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(querry);
+            while(queryResult.next()){
+                if (queryResult.getInt(1)==1) {
+                    registerUser();
+                    confirmPasswordLabel.setText("");
+                    switchToCityHallStart(event);
+                } else {
+                    registrationMessageLabel.setText("Card number not found");
+                }
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
     public void registerButtonOnAction(ActionEvent event) throws IOException{
         if (setPasswordField.getText().equals(confirmPasswordField.getText())){
-            registerUser();
-            confirmPasswordLabel.setText("");
-            switchToCityHallStart(event);
-
+               findInCard_database(ibanTextField.getText(),event);
         }else{
             registrationMessageLabel.setText("");
             confirmPasswordLabel.setText("Password does not match");
