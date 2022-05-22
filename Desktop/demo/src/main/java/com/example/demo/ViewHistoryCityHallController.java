@@ -47,13 +47,14 @@ public class ViewHistoryCityHallController implements Initializable {
     }
     private ResultSet rs;
     private String usernameText=MainCityHallController.usernameSearch;
+    private String username=LoginCityHallController.username;
     private ObservableList<ViewHistoryCityHallControllerUser> list= FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         try{
             DatabaseConnection connectNow=new DatabaseConnection();
             Connection connectDB=connectNow.getConnection();
-            PreparedStatement ps=connectDB.prepareStatement("SELECT * FROM paymenthistoryview WHERE username='"+usernameText+"'");
+            PreparedStatement ps=connectDB.prepareStatement("SELECT * FROM paymenthistoryview WHERE username='"+usernameText+"' AND city='"+username+"'");
             rs=ps.executeQuery();
             while(rs.next()){
                 list.add(new ViewHistoryCityHallControllerUser(rs.getString("car_registration"),rs.getString("area"),rs.getInt("time")));

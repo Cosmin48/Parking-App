@@ -35,15 +35,16 @@ public class MainCityHallController {
         stage.setScene(scene);
         stage.show();
     }
+    private String username=LoginCityHallController.username;
     public void okButton(ActionEvent event){
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
-        String query="SELECT count(1) FROM paymenthistoryview WHERE username='"+usernameTextField.getText()+"'";
+        String query="SELECT count(1) FROM paymenthistoryview WHERE username='"+usernameTextField.getText()+"' AND city='"+username+"'";
         try{
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(query);
             while(queryResult.next()){
-                if (queryResult.getInt(1)==1) {
+                if (queryResult.getInt(1)>=1) {
                     usernameSearch=usernameTextField.getText();
                     switchToviewHistory1(event);
                 } else {
