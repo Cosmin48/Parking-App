@@ -45,7 +45,7 @@ public class MainCityHallController {
             while(queryResult.next()){
                 if (queryResult.getInt(1)==1) {
                     usernameSearch=usernameTextField.getText();
-                    switchToviewHistory(event);
+                    switchToviewHistory1(event);
                 } else {
                     errorLabel.setText("Invalid area");
                 }
@@ -70,6 +70,13 @@ public class MainCityHallController {
 
     public void switchToviewHistory(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("viewHistoryCityHallTransition.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void switchToviewHistory1(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("viewHistoryCityHall.fxml"));
         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         scene=new Scene(root);
         stage.setScene(scene);

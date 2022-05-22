@@ -15,6 +15,6 @@
             <TableColumn fx:id="time" prefWidth="218.00006103515625" text="Time" />
         </columns>
       </TableView>
-      <Button layoutX="284.0" layoutY="349.0" mnemonicParsing="false" text="Ok" />
+      <Button layoutX="284.0" layoutY="349.0" mnemonicParsing="false" onAction="#switchToMainCityHall" text="Ok" />
    </children>
 </AnchorPane>

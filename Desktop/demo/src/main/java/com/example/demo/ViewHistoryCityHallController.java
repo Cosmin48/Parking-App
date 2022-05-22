@@ -24,15 +24,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ViewHistoryCityHallController /*implements Initializable*/ {
+public class ViewHistoryCityHallController implements Initializable {
     @FXML
-    private TableView<RatingUser> table;
+    private TableView<ViewHistoryCityHallControllerUser> table;
     @FXML
-    private TableColumn<RatingUser,Integer> carRegistration;
+    private TableColumn<ViewHistoryCityHallControllerUser,String> carRegistration;
     @FXML
-    private TableColumn<RatingUser,Integer> area;
+    private TableColumn<ViewHistoryCityHallControllerUser,String> area;
     @FXML
-    private TableColumn<RatingUser,Integer> time;
+    private TableColumn<ViewHistoryCityHallControllerUser,Integer> time;
     private Parent root;
     private Scene scene;
     private Stage stage;
@@ -46,27 +46,26 @@ public class ViewHistoryCityHallController /*implements Initializable*/ {
         stage.show();
     }
     private ResultSet rs;
-   /// private String area=CityhallRatingController.area;
-    private ObservableList<RatingUser> list= FXCollections.observableArrayList();
-    /*@Override
+    private String usernameText=MainCityHallController.usernameSearch;
+    private ObservableList<ViewHistoryCityHallControllerUser> list= FXCollections.observableArrayList();
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         try{
             DatabaseConnection connectNow=new DatabaseConnection();
             Connection connectDB=connectNow.getConnection();
-            PreparedStatement ps=connectDB.prepareStatement("SELECT rating FROM "+username+"_"+area);
+            PreparedStatement ps=connectDB.prepareStatement("SELECT * FROM paymenthistoryview WHERE username='"+usernameText+"'");
             rs=ps.executeQuery();
-            int index=1;
             while(rs.next()){
-                list.add(new RatingUser(index,rs.getInt("rating")));
-                index++;
+                list.add(new ViewHistoryCityHallControllerUser(rs.getString("car_registration"),rs.getString("area"),rs.getInt("time")));
             }
-            /*id.setCellValueFactory(new PropertyValueFactory<>("id"));
-            mark.setCellValueFactory(new PropertyValueFactory<>("mark"));
+            carRegistration.setCellValueFactory(new PropertyValueFactory<>("carRegistration"));
+            area.setCellValueFactory(new PropertyValueFactory<>("area"));
+            time.setCellValueFactory(new PropertyValueFactory<>("time"));
             table.setItems(list);
         }catch(Exception e){
             e.printStackTrace();
             e.getCause();
         }
-    }*/
+    }
 
 }
