@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.demo.ViewHistory"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.LoginController">
+   <children>
+      <TableView fx:id="tableView" prefHeight="347.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
+        <columns>
+          <TableColumn fx:id="carNumber" prefWidth="199.33331298828125" text="Car registration number" />
+          <TableColumn fx:id="city" prefWidth="139.99993896484375" text="City" />
+            <TableColumn fx:id="area" prefWidth="126.00006103515625" text="Area" />
+            <TableColumn fx:id="time" prefWidth="134.66668701171875" text="Time" />
+        </columns>
+      </TableView>
+      <Button layoutX="284.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchToMain" style="-fx-background-color: #000000;" text="Ok" textFill="WHITE" />
+   </children>
 </AnchorPane>

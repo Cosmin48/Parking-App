@@ -31,4 +31,11 @@ public class MainController {
         stage.close();
         Platform.exit();
     }
+    public void switchToViewHistory(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("viewHistory.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

@@ -9,14 +9,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import javafx.scene.control.Button;
 import javafx.stage.StageStyle;
 
 import java.io.File;
@@ -164,4 +161,10 @@ public class LoginController {
         stage.setScene(scene);
         stage.show();
     }
+    private TableView <PayHistory> tableView;
+    private TableColumn<PayHistory,String> carNumber;
+    private TableColumn<PayHistory,String> city;
+    private TableColumn<PayHistory,String> area;
+    private TableColumn<PayHistory,String> time;
+
 }
