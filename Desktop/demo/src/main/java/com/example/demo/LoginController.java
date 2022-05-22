@@ -22,6 +22,7 @@ import javafx.stage.StageStyle;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.net.URL;
 
@@ -41,7 +42,7 @@ public class LoginController {
     private Parent root;
     private Scene scene;
     private static int budget=0;
-    private static String cardNumber;
+    private static String cardNumber,username;
 
     public void loginButtonOnAction(ActionEvent event){
         if (!usernameTextField.getText().isBlank() && !enterPasswordField.getText().isBlank()){
@@ -63,6 +64,7 @@ public class LoginController {
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while(queryResult.next()){
                 if (queryResult.getInt(1)==1) {
+                    username=usernameTextField.getText();
                     cardNumber=enterCardNumberField.getText();
                     String text="SELECT budget FROM card_numbers WHERE card_numbers='"+cardNumber+"'";
                     PreparedStatement preparedStatement=connectDB.prepareStatement(text);
@@ -99,6 +101,8 @@ public class LoginController {
     private TextField areaTextField;
     @FXML
     private TextField timeTextField;
+    @FXML
+    private TextField registrationNumber;
     private ResultSet rs;
     private ObservableList<Integer> list;
     public void closeButtonOnAction(ActionEvent event) {
@@ -140,6 +144,16 @@ public class LoginController {
                          String querry3="UPDATE bank_account SET budget= "+budgetBank+" WHERE bank_account='"+iban+"'";
                          PreparedStatement ps3=connectDB.prepareStatement(querry3);
                          ps3.executeUpdate();
+                         String querry5="INSERT INTO paymenthistoryview (username,car_registration,city,area,time,datapay) VALUES (?, ?, ?, ?, ?, ?)";
+                         PreparedStatement ps6=connectDB.prepareStatement(querry5);
+                         ps6.setString(1,username);
+                         ps6.setString(2,registrationNumber.getText());
+                         ps6.setString(3,cityTextField.getText());
+                         ps6.setString(4,areaTextField.getText());
+                         ps6.setInt(5,Integer.parseInt(timeTextField.getText()));
+                         Date currentTime=new Date();
+                         ps6.setString(6, String.valueOf(currentTime));
+                         ps6.executeUpdate();
                          switchToOkPayment(event);
         }
     }

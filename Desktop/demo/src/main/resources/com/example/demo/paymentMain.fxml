@@ -14,11 +14,12 @@
             <Image url="@../../../images/parking.gif" />
          </image>
       </ImageView>
-      <TextField fx:id="cityTextField" layoutX="226.0" layoutY="242.0" promptText="City" />
+      <TextField fx:id="cityTextField" layoutX="226.0" layoutY="258.0" promptText="City" />
       <TextField fx:id="timeTextField" layoutX="226.0" layoutY="328.0" promptText="Time" />
-      <TextField fx:id="areaTextField" layoutX="226.0" layoutY="284.0" promptText="Area" />
+      <TextField fx:id="areaTextField" layoutX="226.0" layoutY="292.0" promptText="Area" />
       <Button fx:id="okButton" layoutX="243.0" layoutY="360.0" mnemonicParsing="false" onAction="#okButtonOnAction" style="-fx-background-color: #000000;" text="Ok" textFill="WHITE" />
       <Label fx:id="errorLabel" layoutX="407.0" layoutY="275.0" prefHeight="17.0" prefWidth="166.0" />
       <Button fx:id="closeButton" layoutX="310.0" layoutY="360.0" mnemonicParsing="false" onAction="#closeButtonOnAction" style="-fx-background-color: #000000;" text="Cancel" textFill="WHITE" />
+      <TextField fx:id="registrationNumber" layoutX="225.0" layoutY="221.0" promptText="Car Registration Number" />
    </children>
 </AnchorPane>
