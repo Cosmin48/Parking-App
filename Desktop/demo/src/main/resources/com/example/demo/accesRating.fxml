@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #B0E0E6;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.CityhallRatingController">
+   <children>
+      <ImageView fitHeight="207.0" fitWidth="323.0" layoutX="133.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/parking.gif" />
+         </image>
+      </ImageView>
+      <TextField fx:id="areaTextField" layoutX="225.0" layoutY="271.0" promptText="Area" />
+      <Button fx:id="okButton" layoutX="243.0" layoutY="360.0" mnemonicParsing="false" onAction="#okButton" style="-fx-background-color: #000000;" text="Ok" textFill="WHITE" />
+      <Label fx:id="errorLabel" layoutX="407.0" layoutY="275.0" prefHeight="17.0" prefWidth="166.0" />
+      <Button layoutX="310.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchToMainCityHall" style="-fx-background-color: #000000;" text="Cancel" textFill="WHITE" />
+      <TextField fx:id="trying" layoutX="226.0" layoutY="235.0" />
+   </children>
+</AnchorPane>

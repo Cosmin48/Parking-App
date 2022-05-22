@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,6 +32,13 @@ public class MainCityHallController {
         Stage stage=(Stage)closeButton.getScene().getWindow();
         stage.close();
         Platform.exit();
+    }
+    public void switchToSeeRating(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("accesRating.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

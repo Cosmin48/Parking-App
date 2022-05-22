@@ -37,7 +37,7 @@ public class LoginCityHallController {
     private Parent root;
     private Scene scene;
     private Stage stage;
-    private static String username;
+    public static String username;
     @FXML
     private TextField nameField;
     @FXML
