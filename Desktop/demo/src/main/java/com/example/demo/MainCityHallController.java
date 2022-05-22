@@ -47,7 +47,7 @@ public class MainCityHallController {
                     usernameSearch=usernameTextField.getText();
                     switchToviewHistory1(event);
                 } else {
-                    errorLabel.setText("Invalid area");
+                    errorLabel.setText("Invalid username");
                 }
             }
         }catch (Exception e) {
