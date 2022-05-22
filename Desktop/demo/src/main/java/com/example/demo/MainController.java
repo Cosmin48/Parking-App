@@ -90,4 +90,12 @@ public class MainController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void switchToRateParking(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("rating.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

@@ -127,5 +127,4 @@ public class RegisterController {
         stage.setScene(scene);
         stage.show();
     }
-
 }
