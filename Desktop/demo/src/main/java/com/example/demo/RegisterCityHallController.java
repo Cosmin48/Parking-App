@@ -20,6 +20,8 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.Scanner;
 import javax.swing.*;
@@ -56,6 +58,30 @@ public class RegisterCityHallController {
     private Scene scene;
     private InputStream fis;
     private static File file;
+    private String getEncryptedpassword(String password) {
+        String encryptedpassword = null;
+        try
+        {
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.update(password.getBytes());
+
+            byte[] bytes = m.digest();
+
+            StringBuilder s = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+
+            encryptedpassword = s.toString();
+        }
+        catch (
+                NoSuchAlgorithmException e)
+        {
+            e.printStackTrace();
+        }
+        return encryptedpassword;
+    }
     public void findInCard_database(String card_number,ActionEvent event){
         String querry="SELECT count(1) from bank_account WHERE bank_account='"+card_number+"'";
         DatabaseConnection connectNow=new DatabaseConnection();
@@ -107,7 +133,7 @@ public class RegisterCityHallController {
             ps.setString(1,firstname);
             ps.setString(2,lastname);
             ps.setString(3,username);
-            ps.setString(4,password);
+            ps.setString(4,getEncryptedpassword(password));
             ps.setString(5,iban);
             ps.setInt(6,0);
             ps.setString(7,file.toURI().toString());

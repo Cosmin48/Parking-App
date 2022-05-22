@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,11 +45,34 @@ public class RegisterController {
     @FXML
     private TextField cardnumberTextField;
 
-
-
     private Parent root;
     private Stage stage;
     private Scene scene;
+
+    private String getEncryptedpassword(String password) {
+    String encryptedpassword = null;
+        try
+    {
+        MessageDigest m = MessageDigest.getInstance("MD5");
+        m.update(password.getBytes());
+
+        byte[] bytes = m.digest();
+
+        StringBuilder s = new StringBuilder();
+        for(int i=0; i< bytes.length ;i++)
+        {
+            s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+
+        encryptedpassword = s.toString();
+    }
+        catch (
+    NoSuchAlgorithmException e)
+    {
+        e.printStackTrace();
+    }
+        return encryptedpassword;
+   }
     public void findInCard_database(String card_number,ActionEvent event){
         String querry="SELECT count(1) from card_numbers WHERE card_numbers='"+card_number+"'";
         DatabaseConnection connectNow=new DatabaseConnection();
@@ -99,7 +124,7 @@ public class RegisterController {
 
 
        String insertFields= "INSERT INTO user_account (firstname, lastname, username, password, card_number) VALUES('";
-       String insertValues=firstname+ "','" +lastname+ "','"+username+ "','"+ password+"','" +card_number+ "')";
+       String insertValues=firstname+ "','" +lastname+ "','"+username+ "','"+ getEncryptedpassword(password) +"','" +card_number+ "')";
        String insertToRegister=insertFields+ insertValues;
 
        try{
