@@ -52,7 +52,6 @@ public class MainController implements Initializable {
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 list.add(new PayHistory(rs.getString("car_registration"),rs.getString("city"),rs.getString("area"),rs.getInt("time"),rs.getString("datapay")));
-                System.out.println(list.get(0));
             }
             carNumber.setCellValueFactory(new PropertyValueFactory<>("carNumber"));
             city.setCellValueFactory(new PropertyValueFactory<>("city"));
