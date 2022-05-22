@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ViewHistoryCityHallController">
+   <children>
+      <TableView fx:id="table" prefHeight="335.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="carRegistration" prefWidth="170.66665649414062" text="Car registration number" />
+          <TableColumn fx:id="area" prefWidth="209.33331298828125" text="Area" />
+            <TableColumn fx:id="time" prefWidth="218.00006103515625" text="Time" />
+        </columns>
+      </TableView>
+      <Button layoutX="284.0" layoutY="349.0" mnemonicParsing="false" text="Ok" />
+   </children>
+</AnchorPane>

@@ -24,17 +24,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class RatingViewController implements Initializable {
+public class ViewHistoryCityHallController /*implements Initializable*/ {
     @FXML
     private TableView<RatingUser> table;
     @FXML
-    private TableColumn<RatingUser,Integer> id;
+    private TableColumn<RatingUser,Integer> carRegistration;
     @FXML
-    private TableColumn<RatingUser,Integer> mark;
+    private TableColumn<RatingUser,Integer> area;
+    @FXML
+    private TableColumn<RatingUser,Integer> time;
     private Parent root;
     private Scene scene;
     private Stage stage;
-    private String username=LoginCityHallController.username;
+
 
     public void switchToMainCityHall(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("maincityhall.fxml"));
@@ -44,9 +46,9 @@ public class RatingViewController implements Initializable {
         stage.show();
     }
     private ResultSet rs;
-    private String area=CityhallRatingController.area;
+   /// private String area=CityhallRatingController.area;
     private ObservableList<RatingUser> list= FXCollections.observableArrayList();
-    @Override
+    /*@Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         try{
             DatabaseConnection connectNow=new DatabaseConnection();
@@ -58,13 +60,13 @@ public class RatingViewController implements Initializable {
                 list.add(new RatingUser(index,rs.getInt("rating")));
                 index++;
             }
-            id.setCellValueFactory(new PropertyValueFactory<>("id"));
+            /*id.setCellValueFactory(new PropertyValueFactory<>("id"));
             mark.setCellValueFactory(new PropertyValueFactory<>("mark"));
             table.setItems(list);
         }catch(Exception e){
             e.printStackTrace();
             e.getCause();
         }
-    }
+    }*/
 
 }

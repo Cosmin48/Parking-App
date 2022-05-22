@@ -27,7 +27,7 @@ public class CityhallRatingController{
     @FXML
     private TextField areaTextField;
     @FXML
-    private Label label;
+    private Label errorLabel;
     private Parent root;
     private Scene scene;
     private Stage stage;
@@ -46,7 +46,7 @@ public class CityhallRatingController{
                     area=areaTextField.getText();
                     switchToRatingView(event);
                 } else {
-                    label.setText("Invalid area");
+                    errorLabel.setText("Invalid area");
                 }
             }
         }catch (Exception e) {
