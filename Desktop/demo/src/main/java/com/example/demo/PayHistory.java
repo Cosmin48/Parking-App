@@ -1,12 +1,14 @@
 package com.example.demo;
 
 public class PayHistory {
-    String carNumber,city,area,time;
-    public PayHistory(String carNumber,String city,String area,String time){
+    String carNumber,city,area,date;
+    int time;
+    public PayHistory(String carNumber,String city,String area,int time,String date){
         this.carNumber=carNumber;
         this.city=city;
         this.area=area;
         this.time=time;
+        this.date=date;
     }
 
     public String getCarNumber() {
@@ -21,8 +23,12 @@ public class PayHistory {
         return area;
     }
 
-    public String getTime() {
+    public int getTime() {
         return time;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public void setCarNumber(String carNumber) {
@@ -37,7 +43,11 @@ public class PayHistory {
         this.area = area;
     }
 
-    public void setTime(String time) {
+    public void setTime(int time) {
         this.time = time;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -23,7 +25,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.net.URL;
 
-public class LoginController {
+public class LoginController{
     @FXML
     private Button cancelButton;
 
@@ -39,7 +41,8 @@ public class LoginController {
     private Parent root;
     private Scene scene;
     private static int budget=0;
-    private static String cardNumber,username;
+    public static String username;
+    private static String cardNumber;
 
     public void loginButtonOnAction(ActionEvent event){
         if (!usernameTextField.getText().isBlank() && !enterPasswordField.getText().isBlank()){
@@ -100,8 +103,7 @@ public class LoginController {
     private TextField timeTextField;
     @FXML
     private TextField registrationNumber;
-    private ResultSet rs;
-    private ObservableList<Integer> list;
+
     public void closeButtonOnAction(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
@@ -114,7 +116,7 @@ public class LoginController {
         Connection connectDB=connectNow.getConnection();
         String querry="SELECT price FROM "+cityTextField.getText()+" WHERE area='"+areaTextField.getText()+"'";
         PreparedStatement ps1=connectDB.prepareStatement(querry);
-        rs= ps1.executeQuery();
+        ResultSet rs = ps1.executeQuery();
         while(rs.next()) {
             price= rs.getInt("price");
         }
@@ -161,10 +163,4 @@ public class LoginController {
         stage.setScene(scene);
         stage.show();
     }
-    private TableView <PayHistory> tableView;
-    private TableColumn<PayHistory,String> carNumber;
-    private TableColumn<PayHistory,String> city;
-    private TableColumn<PayHistory,String> area;
-    private TableColumn<PayHistory,String> time;
-
 }

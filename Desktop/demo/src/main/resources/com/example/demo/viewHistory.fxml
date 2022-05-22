@@ -6,14 +6,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.MainController">
    <children>
       <TableView fx:id="tableView" prefHeight="347.0" prefWidth="600.0" style="-fx-background-color: #ffffff;">
         <columns>
-          <TableColumn fx:id="carNumber" prefWidth="199.33331298828125" text="Car registration number" />
-          <TableColumn fx:id="city" prefWidth="139.99993896484375" text="City" />
-            <TableColumn fx:id="area" prefWidth="126.00006103515625" text="Area" />
-            <TableColumn fx:id="time" prefWidth="134.66668701171875" text="Time" />
+          <TableColumn fx:id="carNumber" prefWidth="150.66665649414062" text="Car registration number" />
+          <TableColumn fx:id="city" prefWidth="87.99993896484375" text="City" />
+            <TableColumn fx:id="area" prefWidth="110.00006103515625" text="Area" />
+            <TableColumn fx:id="time" prefWidth="62.0" text="Time" />
+            <TableColumn fx:id="date" prefWidth="186.66668701171875" text="Date" />
         </columns>
       </TableView>
       <Button layoutX="284.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchToMain" style="-fx-background-color: #000000;" text="Ok" textFill="WHITE" />
