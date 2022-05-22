@@ -90,5 +90,8 @@ public class LoginCityHallController {
         ps.setString(1,nameField.getText());
         ps.setInt(2,Integer.parseInt(priceField.getText()));
         ps.executeUpdate();
+        String query="CREATE TABLE IF NOT EXISTS "+username+"_"+nameField.getText()+"(id int NOT NULL UNIQUE AUTO_INCREMENT, rating int NOT NULL, PRIMARY KEY(id))";
+        PreparedStatement ps1=connectDB.prepareStatement(query);
+        ps1.executeUpdate();
     }
 }
