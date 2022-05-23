@@ -157,10 +157,12 @@ public class LoginController{
             }
             else
             if(i<=7) {
+                if(!(i==7 && character.equals("0")))
                 result[1]=character+result[1];
             }
             else
             if(i<=9) {
+                if(!(i==9 && character.equals("0")))
                 result[0]=character+result[0];
             }
             else {
@@ -183,7 +185,7 @@ public class LoginController{
         String[] currentTimeDropped=dropDate(String.valueOf(currentTime));
         if(new_budget<=0) errorLabel.setText("Error. Not enough founds");
         else if(Integer.parseInt(timeTextField.getText())>4) errorLabel.setText("Maximum 4 hours");
-         else if(Integer.parseInt(currentTimeDropped[0])+Integer.parseInt(timeTextField.getText())>23 || Integer.parseInt(currentTimeDropped[0])<8) errorLabel.setText("Outside of working hours");
+         else if(Integer.parseInt(currentTimeDropped[0])+Integer.parseInt(timeTextField.getText())>18 || Integer.parseInt(currentTimeDropped[0])<8) errorLabel.setText("Outside of working hours");
                      else {
                          budget=new_budget;
                          String querry1="UPDATE card_numbers SET budget= "+budget+" WHERE card_numbers='"+cardNumber+"'";

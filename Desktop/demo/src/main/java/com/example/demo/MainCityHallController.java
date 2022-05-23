@@ -68,10 +68,12 @@ public class MainCityHallController {
             }
             else
             if(i<=7) {
+                if(!(i==7&&character.equals("0")))
                 result[1]=character+result[1];
             }
             else
                 if(i<=9) {
+                    if(!(i==9&&character.equals("0")))
                     result[0]=character+result[0];
                 }
                 else {
