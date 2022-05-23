@@ -18,5 +18,6 @@
       <Button fx:id="okButton" layoutX="243.0" layoutY="360.0" mnemonicParsing="false" onAction="#okButton" style="-fx-background-color: #000000;" text="Ok" textFill="WHITE" />
       <Label fx:id="errorLabel" layoutX="407.0" layoutY="275.0" prefHeight="17.0" prefWidth="166.0" />
       <Button layoutX="310.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchToMainCityHall" style="-fx-background-color: #000000;" text="Cancel" textFill="WHITE" />
+      <Label layoutX="286.0" layoutY="242.0" text="Area" />
    </children>
 </AnchorPane>
