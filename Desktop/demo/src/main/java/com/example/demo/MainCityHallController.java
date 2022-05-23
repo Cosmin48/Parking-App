@@ -45,12 +45,20 @@ public class MainCityHallController {
         stage.setScene(scene);
         stage.show();
     }
+    public void verifyPayment(String date,int time){
+        if(time==0) {
+            resultLabel.setText("Unpayed!");
+            return;
+        }
+
+    }
     public void okButtonFindUnpayed(ActionEvent event) throws SQLException {
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
         String date="";int time=0;
-        PreparedStatement ps=connectDB.prepareStatement("SELECT * FROM paymenthistoryview WHERE car_registration=?");
+        PreparedStatement ps=connectDB.prepareStatement("SELECT * FROM paymenthistoryview WHERE car_registration=? AND city=?");
         ps.setString(1,carRegistrationTextField.getText());
+        ps.setString(2,username);
         ResultSet rs= ps.executeQuery();
         while(rs.next()){
             date=rs.getString("datapay");
