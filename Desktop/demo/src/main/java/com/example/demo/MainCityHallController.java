@@ -13,9 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.Date;
 
 public class MainCityHallController {
     private Parent root;
@@ -24,7 +23,11 @@ public class MainCityHallController {
     @FXML
     private Button closeButton;
     @FXML
+    private Label resultLabel;
+    @FXML
     private TextField usernameTextField;
+    @FXML
+    private TextField carRegistrationTextField;
     @FXML
     private Label errorLabel;
     public static String usernameSearch;
@@ -36,6 +39,80 @@ public class MainCityHallController {
         stage.show();
     }
     private String username=LoginCityHallController.username;
+    public void switchToFindUnpayed(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("findUnpayed.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public String[] dropDate(String date){
+        String digitsDate=date.replaceAll("[^0-9]","");
+        String noDigitsDate=date.replaceAll("[0-9]","");
+        String[] result=new String[4];
+        result[0]="";
+        result[1]="";
+        result[2]="";
+        result[3]=noDigitsDate;
+        int count=digitsDate.length();
+        for (int i=0;i<count;i++){
+            String character=String.valueOf(digitsDate.charAt(count-i-1));
+            if(i<4) {
+                     result[3]=character+result[3];
+            }
+            else
+
+            if(i<=5) {
+                result[2]=character+result[2];
+            }
+            else
+            if(i<=7) {
+                result[1]=character+result[1];
+            }
+            else
+                if(i<=9) {
+                    result[0]=character+result[0];
+                }
+                else {
+                        result[3]=character+result[3];
+                    }
+        }
+        return result;
+    }
+    public void verifyPayment(String date,int time) {
+        if (time == 0) {
+            resultLabel.setText("Unpayed!");
+            return;
+        }
+        String[] dateAsArray = dropDate(date);
+        Date currentTime=new Date();
+        String currentDate=String.valueOf(currentTime);
+        String[] currentDateAsArray=dropDate(currentDate);
+        if(! currentDateAsArray[3].equals(dateAsArray[3])){
+            resultLabel.setText("Unpayed! No records for today.");
+        }
+        else if (Integer.parseInt(currentDateAsArray[0])-Integer.parseInt(dateAsArray[0])<time) {
+            resultLabel.setText("Payed! Last record: "+date);
+        }
+        else if( (Integer.parseInt(currentDateAsArray[0])-Integer.parseInt(dateAsArray[0])==time) && (Integer.parseInt(currentDateAsArray[1])-Integer.parseInt(dateAsArray[1])<0)){
+            resultLabel.setText("Payed! Last record: "+date);
+        } else resultLabel.setText("Unpayed! Last record: "+date);
+    }
+    public void okButtonFindUnpayed(ActionEvent event) throws SQLException {
+        DatabaseConnection connectNow=new DatabaseConnection();
+        Connection connectDB=connectNow.getConnection();
+        String date="";int time=0;
+        PreparedStatement ps=connectDB.prepareStatement("SELECT * FROM paymenthistoryview WHERE car_registration=? AND city=?");
+        ps.setString(1,carRegistrationTextField.getText());
+        ps.setString(2,username);
+        ResultSet rs= ps.executeQuery();
+        while(rs.next()){
+            date=rs.getString("datapay");
+            time=rs.getInt("time");
+        }
+        verifyPayment(date,time);
+    }
     public void okButton(ActionEvent event){
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
