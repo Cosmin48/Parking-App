@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.CityhallRatingController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.RatingViewController">
    <children>
       <Button layoutX="284.0" layoutY="351.0" mnemonicParsing="false" onAction="#switchToMainCityHall" text="Ok" />
-      <TextField fx:id="label" layoutX="225.0" layoutY="187.0" />
+      <TableView fx:id="table" prefHeight="331.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="300.6666564941406" text="C1" />
+          <TableColumn fx:id="mark" prefWidth="298.66668701171875" text="C2" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

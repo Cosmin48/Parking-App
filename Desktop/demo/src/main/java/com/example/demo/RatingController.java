@@ -28,17 +28,14 @@ public class RatingController {
     private TextField areaTextField;
     @FXML
     private TextField ratingTextField;
-    @FXML
-    private Button closeButton;
 
 
      public void okButton(ActionEvent event) throws SQLException, IOException {
          DatabaseConnection connectNow=new DatabaseConnection();
          Connection connectDB= connectNow.getConnection();
-         String querry= "UPDATE "+cityTextField.getText()+" SET rating=? WHERE area=?";
+         String querry= "INSERT INTO "+cityTextField.getText()+"_"+areaTextField.getText()+" (rating) VALUES  (?)";
          PreparedStatement ps= connectDB.prepareStatement(querry);
          ps.setInt(1,Integer.parseInt(ratingTextField.getText()));
-         ps.setString(2,areaTextField.getText());
          ps.executeUpdate();
          switchToOkRegister(event);
 
@@ -51,11 +48,6 @@ public class RatingController {
         scene=new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-    public void closeButtonOnAction(ActionEvent event){
-        Stage stage=(Stage)closeButton.getScene().getWindow();
-        stage.close();
-        Platform.exit();
     }
 
     public void switchToMain(ActionEvent event) throws IOException {

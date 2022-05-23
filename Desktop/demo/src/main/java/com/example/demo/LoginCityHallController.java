@@ -20,6 +20,8 @@ import javafx.stage.StageStyle;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ResourceBundle;
 import java.net.URL;
@@ -42,6 +44,30 @@ public class LoginCityHallController {
     private TextField nameField;
     @FXML
     private TextField priceField;
+    private String getEncryptedpassword(String password) {
+        String encryptedpassword = null;
+        try
+        {
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.update(password.getBytes());
+
+            byte[] bytes = m.digest();
+
+            StringBuilder s = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+
+            encryptedpassword = s.toString();
+        }
+        catch (
+                NoSuchAlgorithmException e)
+        {
+            e.printStackTrace();
+        }
+        return encryptedpassword;
+    }
     public void loginButtonOnAction(ActionEvent event){
         if (!usernameTextField.getText().isBlank() && !enterPasswordField.getText().isBlank()){
             validateLogin(event);
@@ -56,7 +82,7 @@ public class LoginCityHallController {
     public void validateLogin(ActionEvent event){
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
-        String verifyLogin = "SElECT count(1) FROM cityhall_account WHERE username = '" + usernameTextField.getText() + "' AND password = '" + enterPasswordField.getText() + "' AND approve>0";
+        String verifyLogin = "SElECT count(1) FROM cityhall_account WHERE username = '" + usernameTextField.getText() + "' AND password = '" + getEncryptedpassword(enterPasswordField.getText()) + "' AND approve>0";
         try{
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
