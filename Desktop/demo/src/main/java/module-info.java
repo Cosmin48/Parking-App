@@ -5,6 +5,7 @@ module com.example.demo {
     requires javafx.graphics;
     requires mysql.connector.java;
     requires java.desktop;
+    requires org.junit.jupiter.api;
 
 
     opens com.example.demo to javafx.fxml;

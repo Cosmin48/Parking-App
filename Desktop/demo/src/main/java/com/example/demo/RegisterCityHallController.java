@@ -105,7 +105,7 @@ public class RegisterCityHallController {
     }
     public void registerButtonOnAction(ActionEvent event) throws IOException{
         if (setPasswordField.getText().equals(confirmPasswordField.getText())){
-               findInCard_database(ibanTextField.getText(),event);
+            findInCard_database(ibanTextField.getText(),event);
         }else{
             registrationMessageLabel.setText("");
             confirmPasswordLabel.setText("Password does not match");
