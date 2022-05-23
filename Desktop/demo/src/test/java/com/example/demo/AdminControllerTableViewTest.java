@@ -22,6 +22,9 @@ class AdminControllerTableViewTest {
 
     @Test
     void getUsername() {
+        AdminControllerTableView adminControllerTableView=new AdminControllerTableView();
+        adminControllerTableView.setUsername("test");
+        assertTrue(adminControllerTableView.getUsername()=="test");
 
     }
 
