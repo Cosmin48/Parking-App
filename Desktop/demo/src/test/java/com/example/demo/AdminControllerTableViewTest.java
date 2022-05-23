@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AdminControllerTableViewTest {
 
-    @Test
+    /*@Test
     void getFirstname() {
         AdminControllerTableView adminControllerTableView=new AdminControllerTableView();
         adminControllerTableView.setFirstname("test");
@@ -66,5 +66,5 @@ class AdminControllerTableViewTest {
         adminControllerTableView.setImage("test");
         assertTrue(adminControllerTableView.getImage()=="test");
 
-    }
+    }*/
 }
