@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.SeeRatingAdminController">
+   <children>
+      <TableView fx:id="tableView" prefHeight="265.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="area" prefWidth="299.3333435058594" text="Area" />
+          <TableColumn fx:id="rating" minWidth="0.0" prefWidth="300.0" text="Rating" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
