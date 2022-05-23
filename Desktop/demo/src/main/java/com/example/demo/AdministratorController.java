@@ -122,4 +122,11 @@ public class AdministratorController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
+    public void switchToSeeRating(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("adminSeeRatingTransition.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

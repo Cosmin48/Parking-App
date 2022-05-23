@@ -15,10 +15,10 @@
             <Image url="@../../../images/parking.gif" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameTextField" layoutX="225.0" layoutY="271.0" promptText="City" />
+      <TextField fx:id="cityTextField" layoutX="225.0" layoutY="271.0" promptText="City" />
       <Button fx:id="okButton" layoutX="243.0" layoutY="360.0" mnemonicParsing="false" onAction="#okButton" style="-fx-background-color: #000000;" text="Ok" textFill="WHITE" />
       <Label fx:id="errorLabel" layoutX="407.0" layoutY="275.0" prefHeight="17.0" prefWidth="166.0" />
-      <Button layoutX="310.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchToMainCityHall" style="-fx-background-color: #000000;" text="Cancel" textFill="WHITE" />
+      <Button layoutX="310.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchToAdmin" style="-fx-background-color: #000000;" text="Cancel" textFill="WHITE" />
       <Label layoutX="275.0" layoutY="234.0" text="City" />
    </children>
 </AnchorPane>

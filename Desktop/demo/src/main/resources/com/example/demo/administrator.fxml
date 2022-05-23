@@ -13,7 +13,7 @@
          </image>
       </ImageView>
       <Button layoutX="158.0" layoutY="248.0" mnemonicParsing="false" onAction="#switchTocheckRequest" style="-fx-background-color: #0000FF;" text="Check requests" textFill="WHITE" />
-      <Button layoutX="169.0" layoutY="319.0" mnemonicParsing="false" style="-fx-background-color: #0000FF;" text="See ratings" textFill="WHITE" />
+      <Button layoutX="169.0" layoutY="319.0" mnemonicParsing="false" onAction="#switchToSeeRating" style="-fx-background-color: #0000FF;" text="See ratings" textFill="WHITE" />
       <Button layoutX="384.0" layoutY="248.0" mnemonicParsing="false" style="-fx-background-color: #0000FF;" text="Rate a city" textFill="WHITE" />
       <Button fx:id="cancelButton" layoutX="393.0" layoutY="319.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" style="-fx-background-color: #0000ff;" text="Cancel" textFill="WHITE" />
    </children>
