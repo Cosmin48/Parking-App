@@ -20,6 +20,6 @@
       <Label fx:id="errorLabel" layoutX="407.0" layoutY="275.0" prefHeight="17.0" prefWidth="166.0" />
       <Button layoutX="310.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchToMainCityHall" style="-fx-background-color: #000000;" text="Cancel" textFill="WHITE" />
       <Label layoutX="236.0" layoutY="234.0" text="Car registration number" />
-      <Label fx:id="resultLabel" layoutX="203.0" layoutY="316.0" prefHeight="17.0" prefWidth="265.0" />
+      <Label fx:id="resultLabel" alignment="CENTER" layoutX="168.0" layoutY="316.0" prefHeight="17.0" prefWidth="282.0" />
    </children>
 </AnchorPane>

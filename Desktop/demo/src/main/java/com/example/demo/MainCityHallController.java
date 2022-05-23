@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.Date;
 
 public class MainCityHallController {
     private Parent root;
@@ -62,19 +63,18 @@ public class MainCityHallController {
             }
             else
 
-            if(i>=4&&i<=5) {
+            if(i<=5) {
                 result[2]=character+result[2];
             }
             else
-            if(i>=6&&i<=7) {
+            if(i<=7) {
                 result[1]=character+result[1];
             }
             else
-                if(i>=8&&i<=9) {
+                if(i<=9) {
                     result[0]=character+result[0];
                 }
-                else
-                    if(i>=10){
+                else {
                         result[3]=character+result[3];
                     }
         }
@@ -86,6 +86,18 @@ public class MainCityHallController {
             return;
         }
         String[] dateAsArray = dropDate(date);
+        Date currentTime=new Date();
+        String currentDate=String.valueOf(currentTime);
+        String[] currentDateAsArray=dropDate(currentDate);
+        if(! currentDateAsArray[3].equals(dateAsArray[3])){
+            resultLabel.setText("Unpayed! No records for today.");
+        }
+        else if (Integer.parseInt(currentDateAsArray[0])-Integer.parseInt(dateAsArray[0])<time) {
+            resultLabel.setText("Payed! Last record: "+date);
+        }
+        else if( (Integer.parseInt(currentDateAsArray[0])-Integer.parseInt(dateAsArray[0])==time) && (Integer.parseInt(currentDateAsArray[1])-Integer.parseInt(dateAsArray[1])<0)){
+            resultLabel.setText("Payed! Last record: "+date);
+        } else resultLabel.setText("Unpayed! Last record: "+date);
     }
     public void okButtonFindUnpayed(ActionEvent event) throws SQLException {
         DatabaseConnection connectNow=new DatabaseConnection();
