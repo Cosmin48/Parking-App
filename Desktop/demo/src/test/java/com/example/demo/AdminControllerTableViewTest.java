@@ -15,10 +15,14 @@ class AdminControllerTableViewTest {
 
     @Test
     void getLastname() {
+        AdminControllerTableView adminControllerTableView=new AdminControllerTableView();
+        adminControllerTableView.setLastname("test");
+        assertTrue(adminControllerTableView.getLastname()=="test");
     }
 
     @Test
     void getUsername() {
+
     }
 
     @Test
