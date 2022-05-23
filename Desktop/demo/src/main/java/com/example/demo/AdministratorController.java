@@ -115,4 +115,11 @@ public class AdministratorController implements Initializable{
         ps.executeUpdate();
         index++;
     }
+    public void switchToAdministrator(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("administrator.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
