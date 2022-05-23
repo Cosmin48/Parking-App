@@ -13,9 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class MainCityHallController {
     private Parent root;
@@ -24,7 +22,11 @@ public class MainCityHallController {
     @FXML
     private Button closeButton;
     @FXML
+    private Label resultLabel;
+    @FXML
     private TextField usernameTextField;
+    @FXML
+    private TextField carRegistrationTextField;
     @FXML
     private Label errorLabel;
     public static String usernameSearch;
@@ -36,6 +38,26 @@ public class MainCityHallController {
         stage.show();
     }
     private String username=LoginCityHallController.username;
+    public void switchToFindUnpayed(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("findUnpayed.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void okButtonFindUnpayed(ActionEvent event) throws SQLException {
+        DatabaseConnection connectNow=new DatabaseConnection();
+        Connection connectDB=connectNow.getConnection();
+        String date="";int time=0;
+        PreparedStatement ps=connectDB.prepareStatement("SELECT * FROM paymenthistoryview WHERE car_registration=?");
+        ps.setString(1,carRegistrationTextField.getText());
+        ResultSet rs= ps.executeQuery();
+        while(rs.next()){
+            date=rs.getString("datapay");
+            time=rs.getInt("time");
+        }
+        verifyPayment(date,time);
+    }
     public void okButton(ActionEvent event){
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
