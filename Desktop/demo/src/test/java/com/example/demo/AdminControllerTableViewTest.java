@@ -8,6 +8,9 @@ class AdminControllerTableViewTest {
 
     @Test
     void getFirstname() {
+        AdminControllerTableView adminControllerTableView=new AdminControllerTableView();
+        adminControllerTableView.setFirstname("test");
+        assertTrue(adminControllerTableView.getFirstname()=="test");
     }
 
     @Test
