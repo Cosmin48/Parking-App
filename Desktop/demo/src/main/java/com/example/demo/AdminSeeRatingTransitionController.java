@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 
 public class AdminSeeRatingTransitionController {
     private Parent root;
@@ -23,10 +24,19 @@ public class AdminSeeRatingTransitionController {
     private Label errorLabel;
     public static String cityName;
 
-    public void okButton(ActionEvent event) throws IOException {
-
-        cityName=cityTextField.getText();
-        switchToSeeRating(event);
+    public void okButton(ActionEvent event) throws IOException, SQLException {
+        DatabaseConnection connectNow=new DatabaseConnection();
+        Connection connectDB= connectNow.getConnection();
+        String verifyCity="SELECT count(1) FROM cityhall_account WHERE username='"+cityTextField.getText()+"' AND approve=1";
+        Statement ps=connectDB.createStatement();
+        ResultSet rs=ps.executeQuery(verifyCity);
+        while(rs.next()) {
+            if(rs.getInt(1)==1) {
+                cityName=cityTextField.getText();
+                switchToSeeRating(event);
+            }
+            else errorLabel.setText("City not found");
+        }
     }
     public void switchToSeeRating(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("seeRatingAdmin.fxml"));
