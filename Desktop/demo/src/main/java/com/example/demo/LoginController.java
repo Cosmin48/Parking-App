@@ -136,6 +136,39 @@ public class LoginController{
     }
     private int price,budgetBank;
     private String iban;
+    public String[] dropDate(String date){
+        String digitsDate=date.replaceAll("[^0-9]","");
+        String noDigitsDate=date.replaceAll("[0-9]","");
+        String[] result=new String[4];
+        result[0]="";
+        result[1]="";
+        result[2]="";
+        result[3]=noDigitsDate;
+        int count=digitsDate.length();
+        for (int i=0;i<count;i++){
+            String character=String.valueOf(digitsDate.charAt(count-i-1));
+            if(i<4) {
+                result[3]=character+result[3];
+            }
+            else
+
+            if(i<=5) {
+                result[2]=character+result[2];
+            }
+            else
+            if(i<=7) {
+                result[1]=character+result[1];
+            }
+            else
+            if(i<=9) {
+                result[0]=character+result[0];
+            }
+            else {
+                result[3]=character+result[3];
+            }
+        }
+        return result;
+    }
     public void okButtonOnAction(ActionEvent event) throws SQLException, IOException {
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
@@ -146,7 +179,11 @@ public class LoginController{
             price= rs.getInt("price");
         }
         int new_budget=budget-price*Integer.parseInt(timeTextField.getText());
+        Date currentTime=new Date();
+        String[] currentTimeDropped=dropDate(String.valueOf(currentTime));
         if(new_budget<=0) errorLabel.setText("Error. Not enough founds");
+        else if(Integer.parseInt(timeTextField.getText())>4) errorLabel.setText("Maximum 4 hours");
+         else if(Integer.parseInt(currentTimeDropped[0])+Integer.parseInt(timeTextField.getText())>23 || Integer.parseInt(currentTimeDropped[0])<8) errorLabel.setText("Outside of working hours");
                      else {
                          budget=new_budget;
                          String querry1="UPDATE card_numbers SET budget= "+budget+" WHERE card_numbers='"+cardNumber+"'";
@@ -175,7 +212,6 @@ public class LoginController{
                          ps6.setString(3,cityTextField.getText());
                          ps6.setString(4,areaTextField.getText());
                          ps6.setInt(5,Integer.parseInt(timeTextField.getText()));
-                         Date currentTime=new Date();
                          ps6.setString(6, String.valueOf(currentTime));
                          ps6.executeUpdate();
                          switchToOkPayment(event);

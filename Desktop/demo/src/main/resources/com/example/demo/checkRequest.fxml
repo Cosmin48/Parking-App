@@ -16,7 +16,7 @@
         </columns>
       </TableView>
       <ImageView fx:id="imageView" fitHeight="159.0" fitWidth="205.0" layoutX="420.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="cancelButton" layoutX="182.0" layoutY="446.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" style="-fx-background-color: #0000ff;" text="Cancel" textFill="WHITE" />
+      <Button layoutX="182.0" layoutY="446.0" mnemonicParsing="false" onAction="#switchToAdministrator" style="-fx-background-color: #0000ff;" text="Cancel" textFill="WHITE" />
       <Button fx:id="acceptButton" layoutX="71.0" layoutY="346.0" mnemonicParsing="false" onAction="#acceptButtonOnAction" style="-fx-background-color: #B0E0E6;" textFill="WHITE" />
       <Button fx:id="denyButton" layoutX="182.0" layoutY="346.0" mnemonicParsing="false" onAction="#denyButtonOnAction" style="-fx-background-color: #B0E0E6;" textFill="WHITE" />
    </children>
