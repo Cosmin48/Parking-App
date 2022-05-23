@@ -129,4 +129,11 @@ public class AdministratorController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
+    public void switchToRateCity(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("rateCityAdmin.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
