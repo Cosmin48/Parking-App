@@ -10,8 +10,8 @@
       <Button layoutX="284.0" layoutY="351.0" mnemonicParsing="false" onAction="#switchToMainCityHall" text="Ok" />
       <TableView fx:id="table" prefHeight="331.0" prefWidth="600.0">
         <columns>
-          <TableColumn fx:id="id" prefWidth="300.6666564941406" text="C1" />
-          <TableColumn fx:id="mark" prefWidth="298.66668701171875" text="C2" />
+          <TableColumn fx:id="id" prefWidth="300.6666564941406" text="Id" />
+          <TableColumn fx:id="mark" prefWidth="298.66668701171875" text="Rating" />
         </columns>
       </TableView>
    </children>
