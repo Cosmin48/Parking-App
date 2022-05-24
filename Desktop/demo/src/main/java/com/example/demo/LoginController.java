@@ -183,6 +183,16 @@ public class LoginController{
         int new_budget=budget-price*Integer.parseInt(timeTextField.getText());
         Date currentTime=new Date();
         String[] currentTimeDropped=dropDate(String.valueOf(currentTime));
+        String cityUser=cityTextField.getText();
+        PreparedStatement ps5= connectDB.prepareStatement("SELECT count(1) FROM "+cityUser+" WHERE area=?");
+        ps5.setString(1,areaTextField.getText());
+        ResultSet resultSet2=ps5.executeQuery();
+        boolean ok=false;
+        while(resultSet2.next()){
+            if(resultSet2.getInt(1)==1) ok=true;
+        }
+        if(ok==false) errorLabel.setText("Area not found");
+        else
         if(new_budget<=0) errorLabel.setText("Error. Not enough founds");
         else if(Integer.parseInt(timeTextField.getText())>4) errorLabel.setText("Maximum 4 hours");
          else if(Integer.parseInt(currentTimeDropped[0])+Integer.parseInt(timeTextField.getText())>18 || Integer.parseInt(currentTimeDropped[0])<8) errorLabel.setText("Outside of working hours");
