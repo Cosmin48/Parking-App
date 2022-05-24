@@ -174,6 +174,14 @@ public class LoginController{
     public void okButtonOnAction(ActionEvent event) throws SQLException, IOException {
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
+        PreparedStatement ps14= connectDB.prepareStatement("SELECT count(1) FROM cityhall_account WHERE username=? AND approve=1");
+        ps14.setString(1,cityTextField.getText());
+        ResultSet resultSet3=ps14.executeQuery();
+        resultSet3.next();
+        if(resultSet3.getInt(1)!=1) {
+            errorLabel.setText("Invalid city");
+        }
+        else {
         String querry="SELECT price FROM "+cityTextField.getText()+" WHERE area='"+areaTextField.getText()+"'";
         PreparedStatement ps1=connectDB.prepareStatement(querry);
         ResultSet rs = ps1.executeQuery();
@@ -184,49 +192,51 @@ public class LoginController{
         Date currentTime=new Date();
         String[] currentTimeDropped=dropDate(String.valueOf(currentTime));
         String cityUser=cityTextField.getText();
-        PreparedStatement ps5= connectDB.prepareStatement("SELECT count(1) FROM "+cityUser+" WHERE area=?");
-        ps5.setString(1,areaTextField.getText());
-        ResultSet resultSet2=ps5.executeQuery();
-        boolean ok=false;
-        while(resultSet2.next()){
-            if(resultSet2.getInt(1)==1) ok=true;
-        }
-        if(ok==false) errorLabel.setText("Area not found");
-        else
-        if(new_budget<=0) errorLabel.setText("Error. Not enough founds");
-        else if(Integer.parseInt(timeTextField.getText())>4) errorLabel.setText("Maximum 4 hours");
-         else if(Integer.parseInt(currentTimeDropped[0])+Integer.parseInt(timeTextField.getText())>18 || Integer.parseInt(currentTimeDropped[0])<8) errorLabel.setText("Outside of working hours");
-                     else {
-                         budget=new_budget;
-                         String querry1="UPDATE card_numbers SET budget= "+budget+" WHERE card_numbers='"+cardNumber+"'";
-                         PreparedStatement ps=connectDB.prepareStatement(querry1);
-                         ps.executeUpdate();
-                         String querry2="SELECT * FROM cityhall_account WHERE username='"+cityTextField.getText()+"'";
-                         PreparedStatement ps2=connectDB.prepareStatement(querry2);
-                         ResultSet resultSet=ps2.executeQuery();
-                         while(resultSet.next()){
-                             iban=resultSet.getString("iban");
-                         }
-                         String querry4="SELECT * FROM bank_account WHERE bank_account='"+iban+"'";
-                         PreparedStatement ps4=connectDB.prepareStatement(querry4);
-                         ResultSet resultSet1=ps4.executeQuery();
-                         while(resultSet1.next()){
-                         budgetBank=resultSet1.getInt("budget");
-                         }
-                         budgetBank=budgetBank+price*Integer.parseInt(timeTextField.getText());
-                         String querry3="UPDATE bank_account SET budget= "+budgetBank+" WHERE bank_account='"+iban+"'";
-                         PreparedStatement ps3=connectDB.prepareStatement(querry3);
-                         ps3.executeUpdate();
-                         String querry5="INSERT INTO paymenthistoryview (username,car_registration,city,area,time,datapay) VALUES (?, ?, ?, ?, ?, ?)";
-                         PreparedStatement ps6=connectDB.prepareStatement(querry5);
-                         ps6.setString(1,username);
-                         ps6.setString(2,registrationNumber.getText());
-                         ps6.setString(3,cityTextField.getText());
-                         ps6.setString(4,areaTextField.getText());
-                         ps6.setInt(5,Integer.parseInt(timeTextField.getText()));
-                         ps6.setString(6, String.valueOf(currentTime));
-                         ps6.executeUpdate();
-                         switchToOkPayment(event);
+            PreparedStatement ps5 = connectDB.prepareStatement("SELECT count(1) FROM " + cityUser + " WHERE area=?");
+            ps5.setString(1, areaTextField.getText());
+            ResultSet resultSet2 = ps5.executeQuery();
+            boolean ok = false;
+            while (resultSet2.next()) {
+                if (resultSet2.getInt(1) == 1) ok = true;
+            }
+
+            if (ok == false) errorLabel.setText("Area not found");
+            else if (new_budget <= 0) errorLabel.setText("Error. Not enough founds");
+            else if (Integer.parseInt(timeTextField.getText()) > 4) errorLabel.setText("Maximum 4 hours");
+            else if (Integer.parseInt(currentTimeDropped[0]) + Integer.parseInt(timeTextField.getText()) > 18 || Integer.parseInt(currentTimeDropped[0]) < 8)
+                errorLabel.setText("Outside of working hours");
+            else {
+                budget = new_budget;
+                String querry1 = "UPDATE card_numbers SET budget= " + budget + " WHERE card_numbers='" + cardNumber + "'";
+                PreparedStatement ps = connectDB.prepareStatement(querry1);
+                ps.executeUpdate();
+                String querry2 = "SELECT * FROM cityhall_account WHERE username='" + cityTextField.getText() + "'";
+                PreparedStatement ps2 = connectDB.prepareStatement(querry2);
+                ResultSet resultSet = ps2.executeQuery();
+                while (resultSet.next()) {
+                    iban = resultSet.getString("iban");
+                }
+                String querry4 = "SELECT * FROM bank_account WHERE bank_account='" + iban + "'";
+                PreparedStatement ps4 = connectDB.prepareStatement(querry4);
+                ResultSet resultSet1 = ps4.executeQuery();
+                while (resultSet1.next()) {
+                    budgetBank = resultSet1.getInt("budget");
+                }
+                budgetBank = budgetBank + price * Integer.parseInt(timeTextField.getText());
+                String querry3 = "UPDATE bank_account SET budget= " + budgetBank + " WHERE bank_account='" + iban + "'";
+                PreparedStatement ps3 = connectDB.prepareStatement(querry3);
+                ps3.executeUpdate();
+                String querry5 = "INSERT INTO paymenthistoryview (username,car_registration,city,area,time,datapay) VALUES (?, ?, ?, ?, ?, ?)";
+                PreparedStatement ps6 = connectDB.prepareStatement(querry5);
+                ps6.setString(1, username);
+                ps6.setString(2, registrationNumber.getText());
+                ps6.setString(3, cityTextField.getText());
+                ps6.setString(4, areaTextField.getText());
+                ps6.setInt(5, Integer.parseInt(timeTextField.getText()));
+                ps6.setString(6, String.valueOf(currentTime));
+                ps6.executeUpdate();
+                switchToOkPayment(event);
+            }
         }
     }
     public void switchToOkPayment(ActionEvent event) throws IOException {
