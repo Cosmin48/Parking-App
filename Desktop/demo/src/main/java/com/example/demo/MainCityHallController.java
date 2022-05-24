@@ -82,7 +82,7 @@ public class MainCityHallController {
         }
         return result;
     }
-    public void verifyPayment(String date,int time) {
+    public void verifyPayment(String date,int time, String area) {
         if (time == 0) {
             resultLabel.setText("Unpayed!");
             return;
@@ -95,16 +95,16 @@ public class MainCityHallController {
             resultLabel.setText("Unpayed! No records for today.");
         }
         else if (Integer.parseInt(currentDateAsArray[0])-Integer.parseInt(dateAsArray[0])<time) {
-            resultLabel.setText("Payed! Last record: "+date);
+            resultLabel.setText("Payed! Last record: "+date+" for "+time+" hour/s "+area+" area");
         }
         else if( (Integer.parseInt(currentDateAsArray[0])-Integer.parseInt(dateAsArray[0])==time) && (Integer.parseInt(currentDateAsArray[1])-Integer.parseInt(dateAsArray[1])<0)){
-            resultLabel.setText("Payed! Last record: "+date);
-        } else resultLabel.setText("Unpayed! Last record: "+date);
+            resultLabel.setText("Payed! Last record: "+date+" for "+time+" hour/s "+area+" area");
+        } else resultLabel.setText("Unpayed! Last record: "+date+" for "+time+" hour/s "+area+" area");
     }
     public void okButtonFindUnpayed(ActionEvent event) throws SQLException {
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
-        String date="";int time=0;
+        String date="";int time=0;String area="";
         PreparedStatement ps=connectDB.prepareStatement("SELECT * FROM paymenthistoryview WHERE car_registration=? AND city=?");
         ps.setString(1,carRegistrationTextField.getText());
         ps.setString(2,username);
@@ -112,8 +112,9 @@ public class MainCityHallController {
         while(rs.next()){
             date=rs.getString("datapay");
             time=rs.getInt("time");
+            area=rs.getString("area");
         }
-        verifyPayment(date,time);
+        verifyPayment(date,time,area);
     }
     public void okButton(ActionEvent event){
         DatabaseConnection connectNow=new DatabaseConnection();
