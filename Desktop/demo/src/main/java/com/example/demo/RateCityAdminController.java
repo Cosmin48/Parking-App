@@ -36,6 +36,12 @@ public class RateCityAdminController {
     public void okButton(ActionEvent event) throws SQLException, IOException {
       DatabaseConnection connectNow=new DatabaseConnection();
       Connection connectDB= connectNow.getConnection();
+        try {
+            int value=Integer.parseInt(ratingTextField.getText());
+        }catch(Exception e){
+            errorLabel.setText("Not a number");
+            return;
+        }
       PreparedStatement ps=connectDB.prepareStatement("SELECT count(1) FROM cityhall_account WHERE username=? AND approve=1");
       ps.setString(1,cityTextField.getText());
       ResultSet rs=ps.executeQuery();
