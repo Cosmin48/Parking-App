@@ -95,11 +95,11 @@ public class MainCityHallController {
             resultLabel.setText("Unpayed! No records for today.");
         }
         else if (Integer.parseInt(currentDateAsArray[0])-Integer.parseInt(dateAsArray[0])<time) {
-            resultLabel.setText("Payed! Last record: "+date);
+            resultLabel.setText("Payed! Last record: "+date+" for "+time+" hour/s");
         }
         else if( (Integer.parseInt(currentDateAsArray[0])-Integer.parseInt(dateAsArray[0])==time) && (Integer.parseInt(currentDateAsArray[1])-Integer.parseInt(dateAsArray[1])<0)){
-            resultLabel.setText("Payed! Last record: "+date);
-        } else resultLabel.setText("Unpayed! Last record: "+date);
+            resultLabel.setText("Payed! Last record: "+date+" for "+time+" hour/s");
+        } else resultLabel.setText("Unpayed! Last record: "+date+" for "+time+" hour/s");
     }
     public void okButtonFindUnpayed(ActionEvent event) throws SQLException {
         DatabaseConnection connectNow=new DatabaseConnection();
