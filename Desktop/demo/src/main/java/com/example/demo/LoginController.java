@@ -172,6 +172,12 @@ public class LoginController{
         return result;
     }
     public void okButtonOnAction(ActionEvent event) throws SQLException, IOException {
+        try {
+            int value=Integer.parseInt(timeTextField.getText());
+        }catch(Exception e){
+            errorLabel.setText("Not a number");
+            return;
+        }
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
         PreparedStatement ps14= connectDB.prepareStatement("SELECT count(1) FROM cityhall_account WHERE username=? AND approve=1");

@@ -44,6 +44,8 @@ public class LoginCityHallController {
     private TextField nameField;
     @FXML
     private TextField priceField;
+    @FXML
+    private Label errorLabel;
     private String getEncryptedpassword(String password) {
         String encryptedpassword = null;
         try
@@ -111,6 +113,12 @@ public class LoginCityHallController {
     public void addButton(ActionEvent event) throws SQLException {
         DatabaseConnection connectNow=new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
+        try {
+            int value=Integer.parseInt(priceField.getText());
+        }catch(Exception e){
+            errorLabel.setText("Not a number");
+            return;
+        }
         String querry="INSERT INTO "+username+ " (area,price) VALUES (?,?)";
         PreparedStatement ps=connectDB.prepareStatement(querry);
         ps.setString(1,nameField.getText());
